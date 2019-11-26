@@ -20,23 +20,65 @@ function App() {
   }
 
   useEffect(() => {    
-      loadMarkDownFromFile("mark-downs/VirtualHost.md") 
+      loadMarkDownFromFile("https://surran.github.io/mark-downs/VirtualHost.md") 
     },[])
 
   return (
-    <OuterContainer>
-      <Container dangerouslySetInnerHTML={{__html:converter.makeHtml(content)}}>
-      </Container>
-    </OuterContainer>
+    <React.Fragment>
+      <div style={{height:"60px", width:"100%", textAlign:"center", backgroundColor:"white", boxShadow: "rgba(0, 0, 0, 0.05) 0px 2px 4px", zIndex:"10", position:"fixed"}}>
+      <Logo>TERMINAL NOTES<Title>(Everyday issues) => Simple solutions</Title></Logo>
+      <HeaderBar>
+        <HeaderButton>Backend Setups</HeaderButton>
+        <HeaderButton>Coding Practices</HeaderButton>
+        <HeaderButton>Tech Explore</HeaderButton>
+        <HeaderButton>SEO/Share</HeaderButton>
+        <HeaderButton>Useful Tools</HeaderButton>
+      </HeaderBar>
+      </div>
+      <OuterContainer>
+        <Container dangerouslySetInnerHTML={{__html:content}}>
+        </Container>
+      </OuterContainer>
+    </React.Fragment>
     
   );
 }
 
 export default App;
 
+const HeaderBar = styled.div`
+  float: right;
+  padding: 0px 40px;
+`
+const HeaderButton = styled.div`
+  font-size: 16px;
+  display:inline-block;
+  margin: 14px 0px;
+  padding: 10px 10px;
+  color: blue;
+  cursor: pointer;
+`
+
+const Logo = styled.div`
+  float:left;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 15px 40px;
+`
+
+const Title = styled.span`
+  font-size: 12px;
+  font-weight: normal;
+  vertical-align: middle;
+  padding: 10px;
+  display:inline-block;
+  line-height: 1.4;
+`
+
 const Container = styled.div`
-  padding: 20px 40px;
+  padding: 20px 0px;
   color: rgba(0,0,0,.75);
+
   width:100%;
   max-width: 1024px;
   margin: 0 auto;
@@ -46,7 +88,9 @@ const Container = styled.div`
 
 
 const OuterContainer = styled.div`
+  top: 60px;
+  position: relative;
   background-color: #fcfcfc;
   width:100%;
-  height: 100vh;
+  min-height: calc(100vh - 60px);
  `
