@@ -1,79 +1,68 @@
 import React, {useState, useEffect} from 'react';
-import showdown from 'showdown'
+import { BrowserRouter as Switch, Route, Link} from "react-router-dom";
 import styled from 'styled-components'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import Cards from './components/Cards'
+import Content from './components/Content'
+import Header from './components/Header'
+import { loadFile } from './utils/utils'
 
 function App() {
-  const [content, setContent] = useState("")
-  const converter = new showdown.Converter()
+/* Data */
+  const [catalog, setCatalog] = useState([])
 
+  const CATEGORIES = [
+    {handle: "backend", title: "Backend Setups",    searchTags: ["backend"]},
+    {handle: "coding",  title: "Coding Practices",  searchTags: ["backend"]},
+    {handle: "explore", title: "Tech Explore",      searchTags: ["backend"]},
+    {handle: "share",   title: "SEO/Share",         searchTags: ["backend"]},
+    {handle: "tools",   title: "Useful Tools",      searchTags: ["backend"]}
+  ]
 
-  const loadMarkDownFromFile = (filePath) => {
-    fetch(filePath).then(function(res) {
-          if (res.status >= 400) {
-              throw new Error("Data Not Found");
-          }
-          return res.text();
-      })
-      .then(function(responseData) {
-        setContent(responseData)
-      });
+  let reservedWords = [""]
+  reservedWords = reservedWords.concat(CATEGORIES.map(category => category.handle))
+
+  const categoryRoutes = CATEGORIES.map(category => {
+    const { handle, title } = category
+    return (<Route  exact path={`/${handle}`} 
+                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)} title={`Notes on ${title}`}/>)} />)})
+
+  const filterCatalogByTag = (tagTerm) => {
+    return catalog.filter(post => post.tags.some(tag => tag == tagTerm ))
   }
 
-  useEffect(() => {    
-      loadMarkDownFromFile("https://surran.github.io/mark-downs/VirtualHost.md") 
+  const loadCatalog = () => {
+    let onSuccess = (data) => {setCatalog(JSON.parse(data));}
+    loadFile("https://surran.github.io/mark-downs/index.json", onSuccess) 
+  }
+
+  /* on Mount */
+  useEffect(() => {  
+      loadCatalog()
     },[])
 
   return (
-    <React.Fragment>
-      <div style={{height:"60px", width:"100%", textAlign:"center", backgroundColor:"white", boxShadow: "rgba(0, 0, 0, 0.05) 0px 2px 4px", zIndex:"10", position:"fixed"}}>
-      <Logo>TERMINAL NOTES<Title>(Everyday issues) => Simple solutions</Title></Logo>
-      <HeaderBar>
-        <HeaderButton>Backend Setups</HeaderButton>
-        <HeaderButton>Coding Practices</HeaderButton>
-        <HeaderButton>Tech Explore</HeaderButton>
-        <HeaderButton>SEO/Share</HeaderButton>
-        <HeaderButton>Useful Tools</HeaderButton>
-      </HeaderBar>
-      </div>
-      <OuterContainer>
-        <Container dangerouslySetInnerHTML={{__html:content}}>
-        </Container>
-      </OuterContainer>
-    </React.Fragment>
-    
+      <ErrorBoundary>  
+        <Switch>
+          <Header categories={CATEGORIES}/>   
+
+          <OuterContainer>
+            <Container>          
+              <Route exact path={"/"} 
+                     component={() =>(<Cards cardsList={catalog} title="All Notes"/>)} />
+              {categoryRoutes}
+              {/* If none of the above routes match try the content route*/}
+              <Route component={() =>(<Content reservedWords={reservedWords}/>)} />
+            </Container>        
+          </OuterContainer>
+
+        </Switch>
+      </ErrorBoundary>  
+
   );
 }
 
 export default App;
-
-const HeaderBar = styled.div`
-  float: right;
-  padding: 0px 40px;
-`
-const HeaderButton = styled.div`
-  font-size: 16px;
-  display:inline-block;
-  margin: 14px 0px;
-  padding: 10px 10px;
-  color: blue;
-  cursor: pointer;
-`
-
-const Logo = styled.div`
-  float:left;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 15px 40px;
-`
-
-const Title = styled.span`
-  font-size: 12px;
-  font-weight: normal;
-  vertical-align: middle;
-  padding: 10px;
-  display:inline-block;
-  line-height: 1.4;
-`
 
 const Container = styled.div`
   padding: 20px 0px;
@@ -92,5 +81,6 @@ const OuterContainer = styled.div`
   position: relative;
   background-color: #fcfcfc;
   width:100%;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  overflow-y: auto
  `
