@@ -5,9 +5,11 @@
             {
               failureCallback()
             }
-            throw new Error("Data Not Found");
+            else
+              throw new Error("Data Not Found");
           }
-          return res.text();
+          else
+            return res.text();
       })
       .then(function(responseData) {
         if (successCallback) 

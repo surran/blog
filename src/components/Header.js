@@ -22,7 +22,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <HeaderContainer>
-        <Logo to="/">TERMINAL NOTES<Title>(Everyday issues) => Simple solutions</Title></Logo>
+        <Logo to="/">TERMINAL NOTES_<Title>(Everyday issues) => Simple solutions</Title></Logo>
         <HeaderBar>
           {categoryTabs}
         </HeaderBar>

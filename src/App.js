@@ -5,6 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import Cards from './components/Cards'
 import Content from './components/Content'
 import Header from './components/Header'
+import MetaTags from './components/MetaTags'
 import { loadFile } from './utils/utils'
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
       <ErrorBoundary>  
         <Switch>
           <Header categories={CATEGORIES}/>   
-
+          <MetaTags />
           <OuterContainer>
             <Container>          
               <Route exact path={"/"} 

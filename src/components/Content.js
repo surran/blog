@@ -34,7 +34,8 @@ function Content(props) {
         setMemo(newMemo)
         setContent(data)
       }
-      const onCDNFailure = () => loadFile(`https://surran.github.io/mark-downs/${urlHandle}?`, onSuccess)
+      const onAPIFailure = () => setContent("This page isn't available")
+      const onCDNFailure = () => loadFile(`https://surran.github.io/mark-downs/${urlHandle}?`, onSuccess, onAPIFailure)
       loadFile(`https://surran.github.io/mark-downs/${urlHandle}`, onSuccess, onCDNFailure)
     }
   } 
