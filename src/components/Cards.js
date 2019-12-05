@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 
 function Cards(props) {
-  const { cardsList, title } = props
+  const { cardsList, title, category } = props
   const cards = cardsList.map((card)=> {
     const { name, desc, handle } = card
     return (<CardContainer to={`/${handle}`} key={handle}>
@@ -12,8 +12,25 @@ function Cards(props) {
               <Desc>{desc}</Desc>
             </CardContainer>)
   })
+
+  const getCategoryTitle = () => {
+    const categoryTitle = category && category.title 
+    if (categoryTitle)
+      return (<React.Fragment>&nbsp;>&nbsp;{category.title}</React.Fragment>)
+    else 
+      return ""
+  }
+
+  const getHome = () => {
+    if (category)
+      return (<Link to="/">All Notes</Link>)
+    else
+      return (<React.Fragment>All Notes</React.Fragment>)
+  }
+
   return (
     <Container>
+      <BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>
       <ContainerTitle>{title}</ContainerTitle>
       {cards}
     </Container>
@@ -41,10 +58,14 @@ const CardContainer = styled(Link)`
   color: black;
   box-sizing: border-box;
 
-  @media (max-width: 1023px) and (min-width: 520px) {
+
+  @media (max-width: 1023px) and (min-width: 750px) {
+    width: calc(33.33% - 10px)
+  }
+    @media (max-width: 749px) and (min-width: 500px) {
     width: calc(50% - 10px)
   }
-  @media (max-width: 519px) {
+  @media (max-width: 499px) {
     width: calc(100% - 10px)
   }
 `
@@ -52,11 +73,15 @@ const CardContainer = styled(Link)`
 const Title = styled.a`
   font-size: 16px;
   text-decoration: none;
-  color: blue;
+  color:  #0c93e4;
   cursor: pointer;
 `
 
 const Desc = styled.div`
   font-size: 14px;
   margin-top: 5px;
+`
+
+const BreadCrumb = styled.div`
+  padding: 0px 10px;
 `

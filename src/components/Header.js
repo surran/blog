@@ -100,7 +100,7 @@ const HeaderMenuItem = styled(Link)`
   text-decoration: none !important;
   box-sizing: border-box;
 
-  color: blue;
+  color: #0c93e4;
   cursor: pointer;
 `
 
@@ -108,10 +108,9 @@ const HeaderMenuItem = styled(Link)`
 const HeaderButton = styled(Link)`
   font-size: 16px;
   display:inline-block;
-  text-decoration: none;
   margin: 14px 0px;
   padding: 10px 10px 5px;
-  color: blue;
+  color: #0c93e4;
   cursor: pointer;
   font-size: 14px
 `

@@ -5,6 +5,8 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import Cards from './components/Cards'
 import Content from './components/Content'
 import Header from './components/Header'
+import Footer from './components/Footer'
+import SupplimentaryContent from './components/SupplimentaryContent'
 import MetaTags from './components/MetaTags'
 import { loadFile } from './utils/utils'
 
@@ -13,20 +15,44 @@ function App() {
   const [catalog, setCatalog] = useState([])
 
   const CATEGORIES = [
-    {handle: "backend", title: "Backend Setups",    searchTags: ["backend"]},
-    {handle: "coding",  title: "Coding Practices",  searchTags: ["backend"]},
-    {handle: "explore", title: "Tech Explore",      searchTags: ["backend"]},
-    {handle: "share",   title: "SEO/Share",         searchTags: ["backend"]},
-    {handle: "tools",   title: "Useful Tools",      searchTags: ["backend"]}
+    {handle: "backend",       title: "Backend Setups",    searchTags: ["backend"]},
+    {handle: "coding",        title: "Coding Practices",  searchTags: ["coding"]},
+    {handle: "explore",       title: "Tech Explore",      searchTags: ["explore"]},
+    {handle: "share",         title: "SEO/Share",         searchTags: ["share"]},
+    {handle: "tools",         title: "Useful Tools",      searchTags: ["tools"]},
   ]
+
+  const SUPPLIMENTARY_CONTENT = [
+    {handle: "privacy-policy",title: "Privacy Policy",    searchTags: ["tools"]},
+    {handle: "terms-of-use",  title: "Terms of Use",      searchTags: ["tools"]}
+  ]
+
+  let catalogMap = {}
+  catalog.map(note => {
+    const { handle } = note;
+    catalogMap[handle] = note
+  })
+  let categoryMap = {}
+  CATEGORIES.map(category => {
+    const { handle } = category
+    categoryMap[handle] = category
+  })
 
   let reservedWords = [""]
   reservedWords = reservedWords.concat(CATEGORIES.map(category => category.handle))
+  reservedWords = reservedWords.concat(SUPPLIMENTARY_CONTENT.map(category => category.handle))
 
   const categoryRoutes = CATEGORIES.map(category => {
     const { handle, title } = category
     return (<Route  exact path={`/${handle}`} 
-                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)} title={`Notes on ${title}`}/>)} />)})
+                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)} 
+                                            category={categoryMap[handle]} 
+                                            title={`Notes on ${title}`}/>)} />)})
+
+  const SupplimentaryContentRoutes = SUPPLIMENTARY_CONTENT.map(category => {
+    const { handle} = category
+    return (<Route  exact path={`/${handle}`} 
+                    component={() =>(<SupplimentaryContent  handle={handle} />)} />)})
 
   const filterCatalogByTag = (tagTerm) => {
     return catalog.filter(post => post.tags.some(tag => tag == tagTerm ))
@@ -52,12 +78,16 @@ function App() {
               <Route exact path={"/"} 
                      component={() =>(<Cards cardsList={catalog} title="All Notes"/>)} />
               {categoryRoutes}
+              {SupplimentaryContentRoutes}
               {/* If none of the above routes match try the content route*/}
-              <Route component={() =>(<Content reservedWords={reservedWords}/>)} />
-            </Container>        
+              <Route component={() =>(<Content reservedWords={reservedWords} 
+                                               catalogMap={catalogMap} 
+                                               categoryMap={categoryMap}/>)} />
+            </Container>
+            <Footer />        
           </OuterContainer>
-
         </Switch>
+
       </ErrorBoundary>  
 
   );
@@ -71,6 +101,7 @@ const Container = styled.div`
 
   width:100%;
   max-width: 1024px;
+  min-height: calc(100vh - 128px);
   margin: 0 auto;
   font-family: Lato,Helvetica Neue,Helvetica,sans-serif;
   font-variant-ligatures: common-ligatures;
