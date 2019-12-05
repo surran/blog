@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components'
-
+import MetaTags from './MetaTags'
 
 function Cards(props) {
   const { cardsList, title, category } = props
@@ -28,8 +28,10 @@ function Cards(props) {
       return (<React.Fragment>All Notes</React.Fragment>)
   }
 
+  const categoryTitle = category && category.title 
   return (
     <Container>
+      <MetaTags title={categoryTitle} />
       <BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>
       <ContainerTitle>{title}</ContainerTitle>
       {cards}

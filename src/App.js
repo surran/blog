@@ -7,7 +7,6 @@ import Content from './components/Content'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SupplimentaryContent from './components/SupplimentaryContent'
-import MetaTags from './components/MetaTags'
 import { loadFile } from './utils/utils'
 
 function App() {
@@ -72,7 +71,6 @@ function App() {
       <ErrorBoundary>  
         <Switch>
           <Header categories={CATEGORIES}/>   
-          <MetaTags />
           <OuterContainer>
             <Container>          
               <Route exact path={"/"} 

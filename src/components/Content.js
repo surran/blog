@@ -2,6 +2,7 @@ import React, { useEffect , useState } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components'
 import { loadFile } from './../utils/utils'
+import MetaTags from './MetaTags'
 
 
 function Content(props) {
@@ -57,15 +58,12 @@ function Content(props) {
     if (noteObject)
     {
       const categoryTag = noteObject.tags && noteObject.tags.length > 0 &&noteObject.tags[0]
-      console.log(categoryTag)
-      console.log(categoryMap)
       const categoryTitle = categoryTag && categoryMap && 
                             categoryTag in categoryMap && 
                             categoryMap[categoryTag].title
       const categoryHandle = categoryTag && categoryMap && 
                              categoryTag in categoryMap &&
                              categoryMap[categoryTag].handle
-      console.log(categoryHandle)
       if (categoryTitle && categoryHandle)
         return (<React.Fragment>&nbsp;>&nbsp;<Link to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
     }
@@ -75,7 +73,6 @@ function Content(props) {
   const getNoteTitle = () => {
     const fromUrl = extractDataFromUrl()
     const noteObject = catalogMap[fromUrl.urlHandle]
-    console.log(noteObject)
     if (noteObject)
     {
       const noteTitle = noteObject.name
@@ -84,10 +81,19 @@ function Content(props) {
     return ""
   }
 
+  const getNoteObject = () => {
+    const fromUrl = extractDataFromUrl()
+    return catalogMap[fromUrl.urlHandle]
+  }
+
+  const noteObject = getNoteObject() || {}
+  const {name, desc} = noteObject
+
   if (content === "") 
     return null
   else
     return (<div>
+              <MetaTags title={name} description={desc}/>
               <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
             </div>)
