@@ -12,7 +12,7 @@ function Header(props) {
 
   const categoryMenuItems = categories.map(category => {
     const { title, handle } = category
-    return (<HeaderMenuItem key={handle} 
+    return (<HeaderMenuItem key={handle}  
                             onClick={() => setShowHeaderMenu(false)} 
                             to={`/${handle}`}>
               {title}
