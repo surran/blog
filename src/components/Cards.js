@@ -53,7 +53,7 @@ const CardContainer = styled(Link)`
   display: inline-table;
   border: 1px solid #888888;
   border-radius: 5px; 
-  margin: 5px; 
+  margin: 3px; 
   height: 150px;
   padding: 5px;
   text-decoration: none;
@@ -62,13 +62,13 @@ const CardContainer = styled(Link)`
 
 
   @media (max-width: 1023px) and (min-width: 750px) {
-    width: calc(33.33% - 10px)
+    width: calc(33.33% - 6px)
   }
     @media (max-width: 749px) and (min-width: 500px) {
-    width: calc(50% - 10px)
+    width: calc(50% - 6px)
   }
   @media (max-width: 499px) {
-    width: calc(100% - 10px)
+    width: calc(100% - 6px)
   }
 `
 
@@ -77,11 +77,25 @@ const Title = styled.a`
   text-decoration: none;
   color:  #0c93e4;
   cursor: pointer;
+  width: 100%;
+  height: 52px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `
 
 const Desc = styled.div`
   font-size: 14px;
   margin-top: 5px;
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `
 
 const BreadCrumb = styled.div`
