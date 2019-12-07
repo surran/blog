@@ -25,7 +25,7 @@ function Cards(props) {
     if (category)
       return (<Link to="/">All Notes</Link>)
     else
-      return (<React.Fragment>All Notes</React.Fragment>)
+      return null
   }
 
   const categoryTitle = category && category.title 
