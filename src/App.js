@@ -44,7 +44,7 @@ function App() {
   const categoryRoutes = CATEGORIES.map(category => {
     const { handle, title } = category
     return (<Route  exact path={`/${handle}`} 
-                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)} 
+                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)}
                                             category={categoryMap[handle]} 
                                             title={`Notes on ${title}`}/>)} />)})
 
