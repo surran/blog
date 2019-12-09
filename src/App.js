@@ -51,7 +51,7 @@ function App() {
   const SupplimentaryContentRoutes = SUPPLIMENTARY_CONTENT.map(category => {
     const { handle} = category
     return (<Route  exact path={`/${handle}`} 
-                    component={() =>(<SupplimentaryContent  handle={handle} />)} />)})
+                    component={() =>(<SupplimentaryContent handle={handle}/>)} />)})
 
   const filterCatalogByTag = (tagTerm) => {
     return catalog.filter(post => post.tags.some(tag => tag == tagTerm ))
