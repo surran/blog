@@ -44,14 +44,14 @@ function App() {
   const categoryRoutes = CATEGORIES.map(category => {
     const { handle, title } = category
     return (<Route  exact path={`/${handle}`} 
-                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)}
+                    component={() =>(<Cards cardsList={filterCatalogByTag(handle)};
                                             category={categoryMap[handle]} 
                                             title={`Notes on ${title}`}/>)} />)})
 
   const SupplimentaryContentRoutes = SUPPLIMENTARY_CONTENT.map(category => {
     const { handle} = category
     return (<Route  exact path={`/${handle}`} 
-                    component={() =>(<SupplimentaryContent  handle={handle}/>)} />)})
+                    component={() =>(<SupplimentaryContent   handle={handle}/>)} />)})
 
   const filterCatalogByTag = (tagTerm) => {
     return catalog.filter(post => post.tags.some(tag => tag == tagTerm ))
