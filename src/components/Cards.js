@@ -54,7 +54,7 @@ const CardContainer = styled(Link)`
   
   border-bottom: 1px solid #cccccc;
   margin: 6px; 
-  height: 140px;
+  height: 130px;
   padding: 3px;
   text-decoration: none;
   color: black;
