@@ -49,26 +49,33 @@ const ContainerTitle = styled.div`
   padding: 50px 0px 10px 5px;
 `
 const CardContainer = styled(Link)`
-  width: 250px;
+  width: 238px;
   display: inline-table;
-  border: 1px solid #888888;
-  border-radius: 5px; 
-  margin: 3px; 
-  height: 150px;
-  padding: 5px;
+  
+  border-bottom: 1px solid #cccccc;
+  margin: 6px; 
+  height: 140px;
+  padding: 3px;
   text-decoration: none;
   color: black;
-  box-sizing: border-box;
+  box-sizing: content;
 
+  &:hover {
+    background-color: #f5f5f5;
+    margin: 0px;
+    padding: 9px;
+    border-bottom: 1px solid rgba(0,0,0,0)
+  }
 
   @media (max-width: 1023px) and (min-width: 750px) {
-    width: calc(33.33% - 6px)
+    width: calc(33.33% - 18px)
   }
     @media (max-width: 749px) and (min-width: 500px) {
-    width: calc(50% - 6px)
+    width: calc(50% - 18px)
   }
   @media (max-width: 499px) {
-    width: calc(100% - 6px)
+    width: calc(100% - 18px);
+    height: 75px;
   }
 `
 
@@ -84,18 +91,31 @@ const Title = styled.a`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  @media (max-width: 499px) {
+    height: 25px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
 `
 
 const Desc = styled.div`
   font-size: 14px;
   margin-top: 5px;
   width: 100%;
-  height: 70px;
+  height: 75px;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #888888;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+
+  @media (max-width: 499px) {
+    height: 50px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 `
 
 const BreadCrumb = styled.div`
