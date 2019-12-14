@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components'
 import { loadFile } from './../utils/utils'
 import MetaTags from './MetaTags'
+import ContentFooter from "./ContentFooter"
 
 
 function Content(props) {
@@ -96,6 +97,7 @@ function Content(props) {
               <MetaTags title={name} description={desc}/>
               <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
+              <ContentFooter />
             </div>)
 }
 
