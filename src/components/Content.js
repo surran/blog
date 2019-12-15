@@ -10,7 +10,7 @@ function Content(props) {
   const { location, reservedWords } = props
   const [content, setContent] = useState("")
   const [memo, setMemo] = useState({})
-  const { catalogMap, categoryMap} = props
+  const { catalogMap, categoryMap, catalog } = props
 
   const isReservedWordFunction = (word) => {
     return reservedWords.some(rword => rword == word)
@@ -87,17 +87,37 @@ function Content(props) {
     return catalogMap[fromUrl.urlHandle]
   }
 
+  const getNextNoteObject = () => {
+    const thisNote = getNoteObject()
+    if (thisNote)
+    {
+      const thisNoteCategoryTag = thisNote.tags && thisNote.tags.length > 0 && thisNote.tags[0]
+      const thisNoteHandle = thisNote.handle
+      let noteFoundFlag = false;
+      let nextSerially, nextInCategory, firstNote;
+      catalog.map(note => {
+        if (!firstNote) firstNote = note
+        if (noteFoundFlag && !nextSerially) nextSerially = note
+        if (noteFoundFlag && !nextInCategory && thisNoteCategoryTag == note.tags[0])
+          nextInCategory = note
+        if(thisNoteHandle == note.handle) noteFoundFlag = true
+      })
+      return  nextInCategory || nextSerially || firstNote
+    }
+  }
+
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
 
   if (content === "") 
     return null
   else
-    return (<div>
+    return (<div >
               <MetaTags title={name} description={desc}/>
               <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
-              <ContentFooter />
+              <ContentFooter thisNote={getNoteObject()}
+                             nextNote={getNextNoteObject()}/>
             </div>)
 }
 

@@ -71,15 +71,16 @@ function App() {
       <ErrorBoundary>  
         <Switch>
           <Header categories={CATEGORIES}/>   
-          <OuterContainer>
-            <Container>          
+          <OuterContainer id = "outer-container">
+            <Container >          
               <Route exact path={"/"} 
                      component={() =>(<Cards cardsList={catalog} title="All Notes"/>)} />
               {categoryRoutes}
               {SupplimentaryContentRoutes}
               {/* If none of the above routes match try the content route*/}
               <Route component={() =>(<Content reservedWords={reservedWords} 
-                                               catalogMap={catalogMap} 
+                                               catalogMap={catalogMap}
+                                               catalog={catalog} 
                                                categoryMap={categoryMap}/>)} />
             </Container>
             <Footer />        

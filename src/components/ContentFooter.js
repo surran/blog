@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 function ContentFooter(props) {
-	const { title = "Terminal Notes"} = props
+	const title = props.thisNote && props.thisNote.name
+	const { nextNote } = props
+	const nextTitle = props.nextNote && props.nextNote.name
+	const nextDesc = props.nextNote && props.nextNote.desc
+	const nextUrl = props.nextNote && props.nextNote.handle && `/${props.nextNote.handle}`
 	const currentUrl = window.location.href;
 	const shareURL = {
 		facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
@@ -15,25 +19,37 @@ function ContentFooter(props) {
 		return false;
 	}
 	return (<Container>
-				<div class="post-share">
-					<ShareText>Share:</ShareText>
-					<a class="twitter" 
-					   href={shareURL.twitter} 
-					   onClick= {(event) => { sharePopup(shareURL.twitter, 
-								   						 event, 
-								   						 "twitter-share", 
-								   						 {width:550, height: 235})}}>
-					   <SocialIcon src="twitter.svg"/>
-					</a>
-					<a class="facebook" 
-					   href={shareURL.facebook} 
-					   onClick= {(event) => { sharePopup(shareURL.facebook, 
-								   						 event, 
-								   						 "facebook-share", 
-								   						 {width:580, height: 296})}}>
-					   <SocialIcon src="facebook.svg" style={{backgroundColor: "white", width: "45px"}}/>
-					</a>
-				</div>
+				<SocialContainer>
+					<div class="post-share">
+						<ShareText>Share:</ShareText>
+						<a class="twitter" 
+						   href={shareURL.twitter} 
+						   onClick= {(event) => { sharePopup(shareURL.twitter, 
+									   						 event, 
+									   						 "twitter-share", 
+									   						 {width:550, height: 235})}}>
+						   <SocialIcon src="twitter.svg"/>
+						</a>
+						<a class="facebook" 
+						   href={shareURL.facebook} 
+						   onClick= {(event) => { sharePopup(shareURL.facebook, 
+									   						 event, 
+									   						 "facebook-share", 
+									   						 {width:580, height: 296})}}>
+						   <SocialIcon src="facebook.svg" style={{backgroundColor: "white", width: "45px"}}/>
+						</a>
+					</div>
+				</SocialContainer>
+				<hr />
+				<NameContainer>
+				    <MeImg src="me.jpg" />
+					Surya Ranjan Shandil
+				</NameContainer>
+				
+				{nextNote &&<NextContainer to={nextUrl} onClick = {() => setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}> 
+							<NextPreTitle>Next:&nbsp;</NextPreTitle><NextTitle>{nextTitle}</NextTitle><br />
+							{nextDesc}
+							</NextContainer>}
     		</Container>)
 }
 
@@ -42,12 +58,8 @@ export default ContentFooter
 const Container = styled.div`
   position: relative;
   box-sizing: border-box;
-  font-size: 11px;
   margin: 0px;
   width: 100%;
-  padding: 15px;
-  text-align: right;
-  vertical-align: middle;
  `
 
  const SocialIcon = styled.img`
@@ -59,4 +71,59 @@ const ShareText = styled.span`
 	padding: 12px;
 	vertical-align: middle;
 	font-size: 12px;
+`
+
+const SocialContainer = styled.div`
+  padding: 15px;
+  text-align: right;
+  vertical-align: middle;
+  font-size: 14px;
+`
+
+const NameContainer = styled.div`
+  padding: 5px 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+  display:inline-block
+`
+
+const NextContainer = styled(Link)`
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+  width: calc(100% - 240px);
+  display:inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
+
+`
+
+const NextTitle = styled.span`
+	color: #0c93e4;
+	font-size: 16px;
+`
+
+const NextPreTitle = styled.span`
+	font-weight: bold;
+	font-size: 16px;
+`
+
+const MeImg = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  vertical-align: middle;
+  margin: 15px;
 `
