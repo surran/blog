@@ -22,8 +22,8 @@ function App() {
   ]
 
   const SUPPLIMENTARY_CONTENT = [
-    {handle: "privacy-policy",title: "Privacy Policy",    searchTags: ["tools"]},
-    {handle: "terms-of-use",  title: "Terms of Use",      searchTags: ["tools"]}
+    {handle: "privacy-policy",title: "Privacy Policy",    searchTags: ["tools"], noindex: true},
+    {handle: "terms-of-use",  title: "Terms of Use",      searchTags: ["tools"], noindex: true}
   ]
 
   let catalogMap = {}

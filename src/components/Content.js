@@ -16,16 +16,21 @@ function Content(props) {
     return reservedWords.some(rword => rword == word)
   }
 
+  const isNoIndexFunction = (word) => {
+    return reservedWords.some(rword => rword == word && rword.noindex)
+  }
+
   const extractDataFromUrl = () => {
     const urlComponents = window.location.pathname.split("/")
-    let urlHandle = false, isReservedWord = false, inMemo = false
+    let urlHandle = false, isReservedWord = false, inMemo = false, isNoIndex = false
     if (urlComponents.length >= 2)
     {
       urlHandle = urlComponents[1]
       isReservedWord = urlHandle && isReservedWordFunction(urlHandle)
+      isNoIndex = urlHandle && isNoIndexFunction(urlHandle)
       inMemo = !isReservedWord && urlHandle in memo
     }
-    return { urlHandle, isReservedWord, inMemo }
+    return { urlHandle, isReservedWord, inMemo, isNoIndex }
   }
 
   const loadPost = (urlHandle) => {
@@ -113,7 +118,7 @@ function Content(props) {
     return null
   else
     return (<div >
-              <MetaTags title={name} description={desc}/>
+              <MetaTags title={name} description={desc} index={true}/>
               <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
               <ContentFooter thisNote={getNoteObject()}
