@@ -10,7 +10,7 @@ function ContentFooter(props) {
 	const nextUrl = props.nextNote && props.nextNote.handle && `/${props.nextNote.handle}`
 	const currentUrl = window.location.href;
 	const shareURL = {
-		facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+		facebook: `https://www.facebook.com/sharer/sharer.php?caption=${title}&u=${currentUrl}`,
 		twitter: `https://twitter.com/share?text=${title}&amp;url=${currentUrl}`
 	}
 	const sharePopup = (URL, event, title, dimension) => {

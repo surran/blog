@@ -77,7 +77,7 @@ function App() {
                      component={() =>(<Cards cardsList={catalog} title="All Notes"/>)} />
               {categoryRoutes}
               {SupplimentaryContentRoutes}
-              {/* If none of the above routes match try the content route*/}
+              {/* If none of the above routes match try the content route */}
               <Route component={() =>(<Content reservedWords={reservedWords} 
                                                catalogMap={catalogMap}
                                                catalog={catalog} 
@@ -113,5 +113,5 @@ const OuterContainer = styled.div`
   background-color: #fcfcfc;
   width:100%;
   height: calc(100vh - 60px);
-  overflow-y: auto
+  overflow-y: auto;
  `

@@ -4,8 +4,6 @@ import MetaTags from './MetaTags'
 
 const SupplimentaryContent = (props) => {
 	const { handle } = props
-	console.log(handle)
-	console.log(data)
 	const content = data[handle] || ""
 	return (<div>
 		       <MetaTags index={false}/>
