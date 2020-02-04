@@ -3,7 +3,9 @@ import Helmet from "react-helmet";
 
 function MetaTags(props) {
 	const {title = "Terminal Notes",
-	       description = "Simple solutions to everyday issues in web development.", type, imageUrl,
+	       description = "Simple solutions to everyday issues in web development.",
+	       type, 
+	       imageUrl = "temminalNotes.png",
 	       index=true} = props
 
 	return (<Helmet>
