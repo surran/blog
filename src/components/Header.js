@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
-import { Link} from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
 
 
 function Header(props) {
   const [showHeaderMenu, setShowHeaderMenu] = useState(false)
-  const { categories } = props
+  const { categories, location: {pathname}, catalogMap } = props
   const categoryTabs = categories.map(category => {
     const { title, handle } = category
-    return (<HeaderButton key={handle} to={`/${handle}`}>{title}</HeaderButton>)})
+    return (<HeaderButton key={handle} to={`/${handle}`} pressed={pathname.substring(1) === handle || catalogMap[pathname.substring(1)] && catalogMap[pathname.substring(1)].tags[0] === handle}>
+              {title.toUpperCase()}
+            </HeaderButton>)})
 
   const categoryMenuItems = categories.map(category => {
     const { title, handle } = category
     return (<HeaderMenuItem key={handle}  
                             onClick={() => setShowHeaderMenu(false)} 
                             to={`/${handle}`}>
-              {title}
+              {title.toUpperCase()}
             </HeaderMenuItem>)})
 
 
@@ -28,7 +30,7 @@ function Header(props) {
         </HeaderBar>
         
         <MenuIcon onClick={() => setShowHeaderMenu(!showHeaderMenu)}>
-          <svg>
+          <svg height="50" width="50">
             <rect x="0" y="0" height="4" width="25" fill="black"></rect>
             <rect x="0" y="7" height="4" width="25" fill="black"></rect>
             <rect x="0" y="14" height="4" width="25" fill="black"></rect>
@@ -42,7 +44,7 @@ function Header(props) {
   );
 }
 
-export default Header;
+export default withRouter(Header);
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -97,10 +99,11 @@ const HeaderMenuItem = styled(Link)`
   height: 50px;
   display: block;
   padding: 10px;
+  font-weight: 500;
   text-decoration: none !important;
   box-sizing: border-box;
 
-  color: #0c93e4;
+  color: hsla(0, 0%, 6.7%, 0.6);
   cursor: pointer;
 `
 
@@ -110,9 +113,18 @@ const HeaderButton = styled(Link)`
   display:inline-block;
   margin: 14px 0px;
   padding: 10px 10px 5px;
-  color: #0c93e4;
+  padding-bottom: ${props => props.pressed ? "20px" : "10px"};
+  color: ${props => props.pressed ? "#111111" : "hsla(0, 0%, 6.7%, 0.6)"};
+  border-bottom: ${props => props.pressed ? "3px solid #111111" : "none"};;
   cursor: pointer;
   font-size: 14px
+  text-decoration: none;
+  //font-family: "Roboto", "Noto", sans-serif;
+  font-weight: 500;
+
+  :hover {
+    color: #111111;
+  }
 `
 
 

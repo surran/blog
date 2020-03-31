@@ -14,11 +14,11 @@ function App() {
   const [catalog, setCatalog] = useState([])
 
   const CATEGORIES = [
-    {handle: "backend",       title: "Backend Setups",    searchTags: ["backend"]},
-    {handle: "coding",        title: "Coding Practices",  searchTags: ["coding"]},
-    {handle: "explore",       title: "Tech Explore",      searchTags: ["explore"]},
-    {handle: "share",         title: "SEO/Share",         searchTags: ["share"]},
-    {handle: "tools",         title: "Useful Tools",      searchTags: ["tools"]},
+    {handle: "backend",       title: "Backend",    searchTags: ["backend"]},
+    {handle: "coding",        title: "Javascript",  searchTags: ["coding"]},
+    {handle: "explore",       title: "Explore",      searchTags: ["explore"]},
+    {handle: "share",         title: "Share",         searchTags: ["share"]},
+    {handle: "tools",         title: "Tools",      searchTags: ["tools"]},
   ]
 
   const SUPPLIMENTARY_CONTENT = [
@@ -70,7 +70,7 @@ function App() {
   return (
       <ErrorBoundary>  
         <Switch>
-          <Header categories={CATEGORIES}/>   
+          <Header categories={CATEGORIES} catalogMap={catalogMap}/>   
           <OuterContainer id = "outer-container">
             <Container >          
               <Route exact path={"/"} 
