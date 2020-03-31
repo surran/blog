@@ -112,8 +112,9 @@ const HeaderButton = styled(Link)`
   font-size: 16px;
   display:inline-block;
   margin: 14px 0px;
-  padding: 10px 10px 5px;
-  padding-bottom: ${props => props.pressed ? "20px" : "10px"};
+  padding: 10px 15px 5px;
+  outline:none;
+  padding-bottom: 20px;
   color: ${props => props.pressed ? "#111111" : "hsla(0, 0%, 6.7%, 0.6)"};
   border-bottom: ${props => props.pressed ? "3px solid #111111" : "none"};;
   cursor: pointer;
