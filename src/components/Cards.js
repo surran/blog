@@ -3,11 +3,43 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import MetaTags from './MetaTags'
 
+function getColor() {
+  const lightcolors = ["pink", "white", "#ccff99", "#ccffff"]
+  const darkcolors = ["#ff3300", "#996600", "#99ff33", "#0099ff"]
+  const colors = lightcolors
+  const randomNumber = Math.floor(colors.length*Math.random())
+  return colors[randomNumber]
+}
+
+function getSize(word) {
+  const wordLength = word.length
+  const minSize = 25, maxSize = 50
+  const computedSize = Math.floor(30*(7/wordLength))
+  if (computedSize < minSize) {
+    return `${minSize}px`
+  }
+  if (computedSize > maxSize) {
+    return `${maxSize}px`
+  }   
+  return `${computedSize}px`
+}
+
 function Cards(props) {
-  const { cardsList, title, category } = props
+  const { cardsList, title, category,  } = props
+
   const cards = cardsList.map((card)=> {
-    const { name, desc, handle } = card
+    const { name, desc, handle, illustration : {text, image} } = card
+    const words = text.split(" ").map(word => {
+      return (<IllustrationText color={getColor()} fontSize={getSize(word)}>
+                {word}
+              </IllustrationText>)
+    })
     return (<CardContainer to={`/${handle}`} key={handle}>
+              <Illustration>
+                <IllustrationTextContainer>
+                    {words}
+                </IllustrationTextContainer>
+              </Illustration>
               <Title>{name}</Title>
               <Desc>{desc}</Desc>
             </CardContainer>)
@@ -79,12 +111,48 @@ const CardContainer = styled(Link)`
   }
 `
 
+const Illustration = styled.div`
+  width: 100%;
+  display: block;
+  color: white;
+  text-align: center;
+  height: 135px;
+  position: relative;
+  background-color: #3b3b65;
+  box-sizing: border-box;
+  }
+`
+
+const IllustrationTextContainer = styled.div`
+    width: 70%; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+`
+
+const IllustrationText = styled.p`
+  //display: inline-block
+  color: ${props => props.color};
+  font-size: 30px;
+  line-height: 1;
+  margin: 0px;
+  vertical-align: text-top;
+
+  font-size: ${props => props.fontSize};
+  overflow: hidden;
+  font-family: 'Luckiest Guy', cursive;
+  }
+`
+
 const Title = styled.a`
   font-size: 16px;
   text-decoration: none;
   color:  #0c93e4;
   cursor: pointer;
   width: 100%;
+  margin-top: 13px;
   height: 52px;
   overflow: hidden;
   text-overflow: ellipsis;
