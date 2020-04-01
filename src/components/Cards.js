@@ -61,14 +61,18 @@ function Cards(props) {
   }
 
   const categoryTitle = category && category.title 
-  return (
+  if (categoryTitle != "All")
+  {
+    return (
     <Container>
-      <MetaTags title={categoryTitle} />
+      <MetaTags title={`${categoryTitle} Notes`} />
       <BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>
       <ContainerTitle>{title}</ContainerTitle>
       {cards}
     </Container>
-  );
+    );
+  } 
+  return (<MetaTags title={`${categoryTitle} Notes`} />);
 }
 
 export default Cards

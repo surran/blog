@@ -14,6 +14,7 @@ function App() {
   const [catalog, setCatalog] = useState([])
 
   const CATEGORIES = [
+    {handle: "",              title: "All",    searchTags: [""]},
     {handle: "backend",       title: "Backend",    searchTags: ["backend"]},
     {handle: "coding",        title: "Javascript",  searchTags: ["coding"]},
     {handle: "explore",       title: "Explore",      searchTags: ["explore"]},

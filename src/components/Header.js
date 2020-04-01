@@ -24,7 +24,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <HeaderContainer>
-        <Logo to="/">TERMINAL NOTES_<Title>(Everyday issues) => Simple solutions</Title></Logo>
+        <Logo to="/"><LogoText>TERMINAL NOTES_</LogoText><Title>(Everyday issues) => Simple solutions</Title></Logo>
         <HeaderBar>
           {categoryTabs}
         </HeaderBar>
@@ -142,6 +142,11 @@ const Logo = styled(Link)`
     padding: 21px 0px 15px 15px;
     font-size: 20px;
   }
+`
+
+const LogoText = styled.span`
+  //font-family: 'Luckiest Guy', cursive;
+  //font-weight: 100;
 `
 
 const Title = styled.span`
