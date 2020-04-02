@@ -34,7 +34,7 @@ function Cards(props) {
                 {word}
               </IllustrationText>)
     })
-    return (<CardContainer to={`/${handle}`} key={handle}>
+    return (<CardContainer to={`/${handle}`} key={handle} onClick = {() => setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}>
               <Illustration>
                 <IllustrationTextContainer>
                     {words}
