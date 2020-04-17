@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import Helmet from "react-helmet";
 
 function MetaTags(props) {
-	const {title = "Terminal Notes",
-	       description = "Simple solutions to everyday issues in web development.",
+	const {title = "Terminal Notes - Web Development Solutions",
+		   description = "<em>Terminal Notes<em> Web Development Solutions in Javascript, HTML and Nodejs. Explore blog posts on graphics, backend, deployemnt, database, front end and much more.",
 	       type, 
-	       imageUrl = "temminalNotes.png",
+	       imageUrl = "terminalNotes.png",
 	       index=true} = props
-
 	return (<Helmet>
 				<title>{title}</title>
 				<meta name="description" content={description} />

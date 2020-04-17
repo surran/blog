@@ -11,6 +11,10 @@ function getColor() {
   return colors[randomNumber]
 }
 
+function getRandomInt(min,max) {
+  return Math.floor((max - min + 1)*Math.random())
+}
+
 function getSize(word) {
   const wordLength = word.length
   const minSize = 25, maxSize = 50
@@ -25,13 +29,14 @@ function getSize(word) {
 }
 
 function Cards(props) {
-  const { cardsList, title, category,  } = props
-
-  const cards = cardsList.map((card)=> {
+  const { cardsList, title, category, description } = props
+  let metaDesc = "Web development solutions in "
+  const cards = cardsList.map((card, index)=> {
     const { name, desc, handle, illustration : {text, image} } = card
+    metaDesc += (index == 0 ? "" : ", ") + text
     const words = text.split(" ").map(word => {
       return (<IllustrationText color={getColor()} fontSize={getSize(word)}>
-                {word}
+                {word.toUpperCase()}
               </IllustrationText>)
     })
     return (<CardContainer to={`/${handle}`} key={handle} onClick = {() => setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}>
@@ -65,14 +70,19 @@ function Cards(props) {
   {
     return (
     <Container>
-      <MetaTags title={`${categoryTitle} Notes`} />
-      <BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>
-      <ContainerTitle>{title}</ContainerTitle>
+      <MetaTags title={`${categoryTitle} - Terminal Notes`} description={metaDesc}/>
+      {/*<BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>*/}
+      <Description>
+        <L1 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l1}}></L1>
+        <L2 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l2}}></L2>
+        <L3 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l3}}></L3>
+      </Description>
+      {/*<ContainerTitle>{title}</ContainerTitle>*/}
       {cards}
     </Container>
     );
   } 
-  return (<MetaTags title={`${categoryTitle} Notes`} />);
+  return (<MetaTags description={metaDesc} />);
 }
 
 export default Cards
@@ -82,7 +92,7 @@ const Container = styled.div`
 const ContainerTitle = styled.div`
   font-size: 20px;
   font-weight: bold;
-  padding: 50px 0px 10px 5px;
+  padding: 10px 0px 10px 5px;
 `
 const CardContainer = styled(Link)`
   width: 238px;
@@ -178,7 +188,7 @@ const Desc = styled.div`
   height: 75px;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #888888;
+  color: #222222;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -192,4 +202,44 @@ const Desc = styled.div`
 
 const BreadCrumb = styled.div`
   padding: 0px 10px;
+  height: 30px;
+  box-sizing: border-box
+`
+
+const Description = styled.div`
+  padding: 40px 10px 50px;
+  width: 100%;
+  text-align: left;
+  color:#888888;
+  font-size: 20px;
+
+  @media (max-width: 749px) {
+    padding: 20px 30px 30px;
+    font-size: 17px;
+  }
+  
+  box-sizing: border-box;
+`
+const L1 = styled.div`
+  margin-left:${props => props.left}px;
+  transition: all 1s;
+    @media (max-width: 749px) {
+    margin-left: 0px;
+}
+`
+const L2 = styled.div`
+  margin-left:${props => props.left}px;
+  transition: all 1s;
+  @media (max-width: 749px) {
+    margin-left: 0px;
+}
+`
+const L3 = styled.div`
+  color: #a72222;
+  transition: all 1s;
+  margin-left:${props => props.left}px;
+  @media (max-width: 749px) {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
 `

@@ -14,13 +14,39 @@ function App() {
   const [catalog, setCatalog] = useState([])
 
   const CATEGORIES = [
-    {handle: "",              title: "All",    searchTags: [""]},
-    {handle: "backend",       title: "Backend",    searchTags: ["backend"]},
-    {handle: "coding",        title: "Javascript",  searchTags: ["coding"]},
-    {handle: "explore",       title: "Explore",      searchTags: ["explore"]},
-    {handle: "share",         title: "Share",         searchTags: ["share"]},
-    {handle: "tools",         title: "Tools",      searchTags: ["tools"]},
+    {handle: "",              title: "All",       searchTags: [""],
+     description: {l1: "Setting up your first <b>Website</b>?",
+                   l2: "Or setting sight for your <b>First 1000 Users</b>?",
+                   l3: "A Developer's Notes on various aspects of <b>Web development</b>."}
+    },
+    {handle: "share",         title: "Growth",  searchTags: ["share"],
+    description: {l1: "How often does your website appear on <b>Google Search</b>?",
+                  l2: "How does it look when posted on <b>Facebook</b>?",
+                  l3: "If you are thinking <b>Growth</b>, then these are vital concerns that need good solutions."}
+    },
+    {handle: "tools",         title: "Infrastructure",     searchTags: ["tools"],
+    description: {l1: "What is the <b>Level of Automation</b> in your code deployment? Is there a <b>Downtime</b>?",
+                  l2: "Is your deployment <b>Error Resistant</b> and <b>Failure Proof?",
+                  l3: "Your website of tomorrow needs good scripts, tools and <b>Infrastructure</b> today."}
+    },
+    {handle: "backend",       title: "Backend",   searchTags: ["backend"],
+    description: {l1: "How to configure your server to host <b>Multiple Websites</b>?",
+                  l2: "How to get <b>Server Side Routing</b> right?",
+                  l3: "Get started with basic backend <b>Configurations</b> for your website."}
+    },
+    {handle: "coding",        title: "Frontend",  searchTags: ["coding"],
+    description: {l1: "What is the right <b>Construct</b> for embeddable applications?",
+                  l2: "How to <b>Architect</b> parallel processing on browser?",
+                  l3: "Explore the full potential of <b>Javascript.</b>"}
+    },
+    {handle: "explore",       title: "Projects",  searchTags: ["explore"],
+    description: {l1: "Curious about building on <b>Ideas</b>?",
+                  l2: "And writing your own application development story",
+                  l3: "Take a look at things from a <b>Product Perspective</b>."}
+    },  
   ]
+
+  const mainDescription = CATEGORIES[0].description
 
   const SUPPLIMENTARY_CONTENT = [
     {handle: "privacy-policy",title: "Privacy Policy",    searchTags: ["tools"], noindex: true},
@@ -43,11 +69,12 @@ function App() {
   reservedWords = reservedWords.concat(SUPPLIMENTARY_CONTENT.map(category => category.handle))
 
   const categoryRoutes = CATEGORIES.map(category => {
-    const { handle, title } = category
+    const { handle, title, description } = category
     return (<Route  exact path={`/${handle}`} 
                     component={() =>(<Cards cardsList={filterCatalogByTag(handle)}
                                             category={categoryMap[handle]} 
-                                            title={`Notes on ${title}`}/>)} />)})
+                                            title={`Notes on ${title}`}
+                                            description={description} />)}/>)})
 
   const SupplimentaryContentRoutes = SUPPLIMENTARY_CONTENT.map(category => {
     const { handle} = category
@@ -75,7 +102,7 @@ function App() {
           <OuterContainer id = "outer-container">
             <Container >          
               <Route exact path={"/"} 
-                     component={() =>(<Cards cardsList={catalog} title="All Notes"/>)} />
+                     component={() =>(<Cards cardsList={catalog} title="All Notes" description={mainDescription}/>)} />
               {categoryRoutes}
               {SupplimentaryContentRoutes}
               {/* If none of the above routes match try the content route */}
@@ -114,5 +141,5 @@ const OuterContainer = styled.div`
   background-color: #fcfcfc;
   width:100%;
   height: calc(100vh - 60px);
-  overflow-y: auto;
+  overflow-y: scroll;
  `
