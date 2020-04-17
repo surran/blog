@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 
 function MetaTags(props) {
 	const {title = "Terminal Notes - Web Development Solutions",
-		   description = "<em>Terminal Notes<em> Web Development Solutions in Javascript, HTML and Nodejs. Explore blog posts on graphics, backend, deployemnt, database, front end and much more.",
+		   description = "<em>Terminal Notes<em> Web Development Solutions in Javascript, HTML and Nodejs. A developer's notes on graphics, backend, deployment, database, front end and much more.",
 	       type, 
 	       imageUrl = "terminalNotes.png",
 	       index=true} = props

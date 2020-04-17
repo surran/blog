@@ -30,10 +30,10 @@ function getSize(word) {
 
 function Cards(props) {
   const { cardsList, title, category, description } = props
-  let metaDesc = "Web development solutions in "
+  let metaDesc = "Web Development Solutions in "
   const cards = cardsList.map((card, index)=> {
     const { name, desc, handle, illustration : {text, image} } = card
-    metaDesc += (index == 0 ? "" : ", ") + text
+    metaDesc += (index == 0 ? "" : (index == cardsList.length - 1) ? " and " : ", ") + text
     const words = text.split(" ").map(word => {
       return (<IllustrationText color={getColor()} fontSize={getSize(word)}>
                 {word.toUpperCase()}
@@ -82,7 +82,7 @@ function Cards(props) {
     </Container>
     );
   } 
-  return (<MetaTags description={metaDesc} />);
+  return (<MetaTags />);
 }
 
 export default Cards
