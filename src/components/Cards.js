@@ -123,7 +123,7 @@ const CardContainer = styled(Link)`
     border-bottom: 1px solid rgba(0,0,0,0)
   }
 
-  @media (max-width: 1023px) and (min-width: 750px) {
+  @media (max-width: 1038px) and (min-width: 750px) {
     width: calc(33.33% - 18px)
   }
     @media (max-width: 749px) and (min-width: 500px) {
