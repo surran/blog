@@ -5,7 +5,7 @@ function MetaTags(props) {
 	const {title = "Terminal Notes - Web Development Solutions",
 		   description = "<em>Terminal Notes<em> Web Development Solutions in Javascript, HTML and Nodejs. A developer's notes on graphics, backend, deployment, database, front end and much more.",
 	       type, 
-	       imageUrl = "/growthImages/terminalNotes.png",
+	       imageUrl = "https://www.terminalnotes.com/growthImages/terminalNotes.png",
 	       index=true} = props
 	return (<Helmet>
 				<title>{title}</title>
