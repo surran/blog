@@ -65,6 +65,11 @@ function Cards(props) {
       return null
   }
 
+  /*points = {topLeft:{x:getRandomInt(0,50), y:0},
+            topRight:{x:getRandomInt(0,50), y:0},
+            bottomLeft:{x:getRandomInt(0,150), y:0},
+            bottomRight:{x:getRandomInt(0,50), y:0},}
+  */
   const categoryTitle = category && category.title 
   if (categoryTitle != "All")
   {
@@ -72,11 +77,16 @@ function Cards(props) {
     <Container>
       <MetaTags title={`${categoryTitle} - Terminal Notes`} description={metaDesc}/>
       {/*<BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>*/}
+      {/*<svg height="210" width="100%" style={{position:"absolute"}}>
+        <polygon points="0,0 getRandomInt(),0 160,210 10,200" style={{fill:"#fcfcfc"}} />
+        Sorry, your browser does not support inline SVG.
+      </svg>*/}
       <Description>
         <L1 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l1}}></L1>
         <L2 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l2}}></L2>
         <L3 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l3}}></L3>
       </Description>
+      
       {/*<ContainerTitle>{title}</ContainerTitle>*/}
       {cards}
     </Container>
@@ -208,16 +218,25 @@ const BreadCrumb = styled.div`
 
 const Description = styled.div`
   padding: 40px 10px 50px;
-  width: 100%;
+  width: calc(100% - 20px);
   text-align: left;
-  color:#888888;
-  font-size: 20px;
+  color:#353029;
+  font-size: 18px;
+  font-weight:200;
+  background-color: #f4f6f7;
 
   @media (max-width: 749px) {
-    padding: 20px 30px 30px;
+    padding: 50px 30px 30px;
+    margin: 0px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    width: 100%;
     font-size: 17px;
+    background-color: #e2e8eb;
   }
-  
+  margin: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
   box-sizing: border-box;
 `
 const L1 = styled.div`
@@ -235,11 +254,12 @@ const L2 = styled.div`
 }
 `
 const L3 = styled.div`
-  color: #a72222;
+  color:#b956e4;
   transition: all 1s;
   margin-left:${props => props.left}px;
   @media (max-width: 749px) {
     margin-left: 0px;
     margin-top: 20px;
+    font-size:19px;
   }
 `

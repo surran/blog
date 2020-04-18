@@ -15,34 +15,34 @@ function App() {
 
   const CATEGORIES = [
     {handle: "",              title: "All",       searchTags: [""],
-     description: {l1: "Setting up your first <b>Website</b>?",
-                   l2: "Or setting sight for your <b>First 1000 Users</b>?",
-                   l3: "A Developer's Notes on various aspects of <b>Web development</b>."}
+     description: {l1: "Setting up your first <em>Website</em>?",
+                   l2: "Or setting sight for your <em>First 1000 Users</em>?",
+                   l3: "A Developer's Notes on various aspects of <em>Web development</em>."}
     },
     {handle: "share",         title: "Growth",  searchTags: ["share"],
-    description: {l1: "How often does your website appear on <b>Google Search</b>?",
-                  l2: "How does it look when posted on <b>Facebook</b>?",
-                  l3: "If you are thinking <b>Growth</b>, then these are vital concerns that need good solutions."}
+    description: {l1: "How often does your website appear on <em>Google Search</em>?",
+                  l2: "How does it look when posted on <em>Facebook</em>?",
+                  l3: "If you are thinking <em>Growth</em>, then these are vital concerns that need good solutions."}
     },
     {handle: "tools",         title: "Infrastructure",     searchTags: ["tools"],
-    description: {l1: "What is the <b>Level of Automation</b> in your code deployment? Is there a <b>Downtime</b>?",
-                  l2: "Is your deployment <b>Error Resistant</b> and <b>Failure Proof?",
-                  l3: "Your website of tomorrow needs good scripts, tools and <b>Infrastructure</b> today."}
+    description: {l1: "What is the <em>Level of Automation</em> in your code deployment? Is there a <b>Downtime</b>?",
+                  l2: "Is your deployment <em>Error Resistant</em> and <em>Failure Proof?",
+                  l3: "Your website of tomorrow needs good scripts, tools and <em>Infrastructure</em> today."}
     },
     {handle: "backend",       title: "Backend",   searchTags: ["backend"],
-    description: {l1: "How to configure your server to host <b>Multiple Websites</b>?",
-                  l2: "How to get <b>Server Side Routing</b> right?",
-                  l3: "Get started with basic backend <b>Configurations</b> for your website."}
+    description: {l1: "How to configure your server to host <em>Multiple Websites</em>?",
+                  l2: "How to get <em>Server Side Routing</em> right?",
+                  l3: "Get started with basic backend <em>Configurations</em> for your website."}
     },
     {handle: "coding",        title: "Frontend",  searchTags: ["coding"],
-    description: {l1: "What is the right <b>Construct</b> for embeddable applications?",
-                  l2: "How to <b>Architect</b> parallel processing on browser?",
-                  l3: "Explore the full potential of <b>Javascript.</b>"}
+    description: {l1: "What is the right <em>Construct</em> for embeddable applications?",
+                  l2: "How to <em>Architect</em> parallel processing on browser?",
+                  l3: "Explore the full potential of <em>Javascript.</em>"}
     },
     {handle: "explore",       title: "Projects",  searchTags: ["explore"],
-    description: {l1: "Curious about building on <b>Ideas</b>?",
+    description: {l1: "Curious about building on <em>Ideas</em>?",
                   l2: "And writing your own application development story",
-                  l3: "Take a look at things from a <b>Product Perspective</b>."}
+                  l3: "Take a look at things from a <em>Product Perspective</em>."}
     },  
   ]
 
