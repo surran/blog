@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SupplimentaryContent from './components/SupplimentaryContent'
 import { loadFile } from './utils/utils'
+import CategoryTabs from './components/CategoryTabs';
 
 function App() {
 /* Data */
@@ -72,6 +73,8 @@ function App() {
     const { handle, title, description } = category
     return (<Route  exact path={`/${handle}`} 
                     component={() =>(<Cards cardsList={filterCatalogByTag(handle)}
+                                            categories={CATEGORIES}
+                                            catalogMap={catalogMap}
                                             category={categoryMap[handle]} 
                                             title={`Notes on ${title}`}
                                             description={description} />)}/>)})
@@ -98,13 +101,22 @@ function App() {
   return (
       <ErrorBoundary>  
         <Switch>
-          <Header categories={CATEGORIES} catalogMap={catalogMap}/>   
+          <Header categories={CATEGORIES} catalogMap={catalogMap}/>
+          
           <OuterContainer id = "outer-container">
+            <CategoryTabsContainer>
+              <CategoryTabs  categories={CATEGORIES} catalogMap={catalogMap} scrollableTabs/> 
+            </CategoryTabsContainer>
             <Container >          
               <Route exact path={"/"} 
-                     component={() =>(<Cards cardsList={catalog} title="All Notes" description={mainDescription}/>)} />
+                     component={() =>(<Cards cardsList={catalog} 
+                                             title="All Notes" 
+                                             categories={CATEGORIES}
+                                             catalogMap={catalogMap}
+                                             description={mainDescription}/>)} />
               {categoryRoutes}
               {SupplimentaryContentRoutes}
+              
               {/* If none of the above routes match try the content route */}
               <Route component={() =>(<Content reservedWords={reservedWords} 
                                                catalogMap={catalogMap}
@@ -143,3 +155,19 @@ const OuterContainer = styled.div`
   height: calc(100vh - 60px);
   overflow-y: scroll;
  `
+
+ const CategoryTabsContainer = styled.div`
+  width: 100%;
+  height: 71px;
+  position: absolute;
+  margin-bottom: 20px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e2e8eb;
+  position: relative;
+  overflow: hidden;
+  
+  @media only screen and (min-width: 1024px) {
+    display:none;
+  }
+`

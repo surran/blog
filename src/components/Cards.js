@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import MetaTags from './MetaTags'
+import CategoryTabs from './CategoryTabs';
 
 function getColor() {
   const lightcolors = ["pink", "white", "#ccff99", "#ccffff"]
@@ -86,7 +87,6 @@ function Cards(props) {
         <L2 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l2}}></L2>
         <L3 left={getRandomInt(0,40)} dangerouslySetInnerHTML={{__html: description.l3}}></L3>
       </Description>
-      
       {/*<ContainerTitle>{title}</ContainerTitle>*/}
       {cards}
     </Container>
@@ -225,15 +225,16 @@ const Description = styled.div`
   font-weight:200;
   background-color: #f4f6f7;
 
-  @media (max-width: 749px) {
-    padding: 50px 30px 30px;
+  @media (max-width: 1023px) {
+    padding: 30px 30px 30px;
     margin: 0px;
-    margin-bottom: 20px;
-    margin-top: -30px;
+    margin-bottom: 5px;
+    margin-top: -40px;
     width: 100%;
     font-size: 17px;
     background-color: #e2e8eb;
   }
+
   margin: 10px;
   margin-top: 8px;
   margin-bottom: 20px;

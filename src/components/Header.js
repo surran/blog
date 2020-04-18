@@ -1,16 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
+import CategoryTabs from './CategoryTabs';
 
 
 function Header(props) {
   const [showHeaderMenu, setShowHeaderMenu] = useState(false)
   const { categories, location: {pathname}, catalogMap } = props
-  const categoryTabs = categories.map(category => {
-    const { title, handle } = category
-    return (<HeaderButton key={handle} to={`/${handle}`} pressed={pathname.substring(1) === handle || catalogMap[pathname.substring(1)] && catalogMap[pathname.substring(1)].tags[0] === handle}>
-              {title.toUpperCase()}
-            </HeaderButton>)})
 
   const categoryMenuItems = categories.map(category => {
     const { title, handle } = category
@@ -25,17 +21,16 @@ function Header(props) {
     <React.Fragment>
       <HeaderContainer>
         <Logo to="/"><LogoText>TERMINAL NOTES_</LogoText><Title>Web Development Solutions</Title></Logo>
-        <HeaderBar>
-          {categoryTabs}
-        </HeaderBar>
-        
-        <MenuIcon onClick={() => setShowHeaderMenu(!showHeaderMenu)}>
+        <CategoryTabsContainer>
+          <CategoryTabs categories={categories} catalogMap={catalogMap}/>
+        </CategoryTabsContainer>
+        {/*<MenuIcon onClick={() => setShowHeaderMenu(!showHeaderMenu)}>
           <svg height="50" width="50">
             <rect x="0" y="0" height="4" width="25" fill="black"></rect>
             <rect x="0" y="7" height="4" width="25" fill="black"></rect>
             <rect x="0" y="14" height="4" width="25" fill="black"></rect>
           </svg>
-        </MenuIcon>
+         </MenuIcon>*/}
       </HeaderContainer>
       {showHeaderMenu &&  <HeaderMenu>
                               {categoryMenuItems}
@@ -56,11 +51,8 @@ const HeaderContainer = styled.div`
   z-index:10;
   position:fixed;
 `
-
-const HeaderBar = styled.div`
-  float: right;
-  padding: 0px 40px 0px 0px;
-
+const CategoryTabsContainer = styled.div`
+  float:right;
   @media only screen and (max-width: 1023px) {
     display:none;
   }
@@ -88,7 +80,7 @@ const HeaderMenu = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 12px 14px;
   background-color: white;
   box-sizing: border-box;
-
+  
   @media (min-width: 1024px) {
     display: none;
   }
@@ -106,30 +98,6 @@ const HeaderMenuItem = styled(Link)`
   color: hsla(0, 0%, 6.7%, 0.6);
   cursor: pointer;
 `
-
-
-const HeaderButton = styled(Link)`
-  font-size: 16px;
-  display:inline-block;
-  margin: 14px 0px;
-  padding: 10px 15px 5px;
-  outline:none;
-  padding-bottom: 20px;
-  color: ${props => props.pressed ? "#111111" : "hsla(0, 0%, 6.7%, 0.6)"};
-  border-bottom: ${props => props.pressed ? "3px solid #111111" : "none"};;
-  cursor: pointer;
-  font-size: 14px
-  text-decoration: none;
-  //font-family: "Roboto", "Noto", sans-serif;
-  font-weight: 500;
-
-  :hover {
-    color: #111111;
-  }
-`
-
-
-
 const Logo = styled(Link)`
   float:left;
   font-size: 30px;
@@ -137,6 +105,7 @@ const Logo = styled(Link)`
   padding: 15px 0px 5px 40px;
   color: black;
   text-decoration: none;
+  font-family: Monospace;
 
   @media only screen and (max-width: 450px) {
     padding: 21px 0px 15px 15px;
