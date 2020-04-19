@@ -5,9 +5,17 @@ import styled from 'styled-components'
 
 function CategoryTabs(props) {
   const { categories, location: {pathname}, catalogMap, scrollableTabs } = props
+  let pressedFound = false;
   const categoryTabs = categories.map(category => {
     const { title, handle } = category
-    return (<HeaderButton key={handle} to={`/${handle}`} pressed={pathname.substring(1) === handle || catalogMap[pathname.substring(1)] && catalogMap[pathname.substring(1)].tags[0] === handle}>
+    const urlHandle = pathname.substring(1)
+    const pressed = !pressedFound &&
+                    (urlHandle === handle || 
+                        catalogMap[urlHandle] && 
+                        catalogMap[urlHandle].tags.some(tag => tag === handle))
+    if (pressed)
+        pressedFound = true
+    return (<HeaderButton key={handle} to={`/${handle}`} pressed={pressed}>
               {title.toUpperCase()}
             </HeaderButton>)})
 

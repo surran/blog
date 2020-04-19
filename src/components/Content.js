@@ -61,17 +61,17 @@ function Content(props) {
   const getCategory = () => {
     const fromUrl = extractDataFromUrl()
     const noteObject = catalogMap[fromUrl.urlHandle]
-    if (noteObject)
+    if (noteObject && noteObject.tags && noteObject.tags.length > 0 )
     {
-      const categoryTag = noteObject.tags && noteObject.tags.length > 0 &&noteObject.tags[0]
-      const categoryTitle = categoryTag && categoryMap && 
-                            categoryTag in categoryMap && 
-                            categoryMap[categoryTag].title
-      const categoryHandle = categoryTag && categoryMap && 
-                             categoryTag in categoryMap &&
-                             categoryMap[categoryTag].handle
+      const matchingCategories = noteObject.tags.filter(tag => tag in categoryMap)
+      const firstMatchingCategory = (matchingCategories.length > 0) ? matchingCategories[0] : false
+
+      const categoryTitle = firstMatchingCategory &&
+                            categoryMap[firstMatchingCategory].title
+      const categoryHandle = firstMatchingCategory &&
+                              categoryMap[firstMatchingCategory].handle
       if (categoryTitle && categoryHandle)
-        return (<React.Fragment>&nbsp;>&nbsp;<Link to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
+          return (<React.Fragment>&nbsp;>&nbsp;<Link to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
     }
     return ""
   }

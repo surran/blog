@@ -20,13 +20,13 @@ function App() {
                    l2: "Or setting sight for your <em>First 1000 Users</em>?",
                    l3: "A Developer's Notes on various aspects of <em>Web development</em>."}
     },
-    {handle: "share",         title: "Growth",  searchTags: ["share"],
+    {handle: "growth",         title: "Growth",  searchTags: ["share"],
     image: {url: "growthImages/share.png", alt: "Growth, Google SEO and Facebook Share"},
     description: {l1: "How often does your website appear on <em>Google Search</em>?",
                   l2: "How does it look when posted on <em>Facebook</em>?",
                   l3: "If you are thinking <em>Growth</em>, then these are vital concerns that need good solutions."}
     },
-    {handle: "tools",         title: "Infrastructure",     searchTags: ["tools"],
+    {handle: "infrastructure",         title: "Infrastructure",     searchTags: ["tools"],
     image: {url: "growthImages/tools.png", alt: "Infrastructure, Tool and Scripts"},
     description: {l1: "What is the <em>Level of Automation</em> in your code deployment? Is there a <b>Downtime</b>?",
                   l2: "Is your deployment <em>Error Resistant</em> and <em>Failure Proof?",
@@ -38,13 +38,13 @@ function App() {
                   l2: "How to get <em>Server Side Routing</em> right?",
                   l3: "Get started with basic backend <em>Configurations</em> for your website."}
     },
-    {handle: "coding",        title: "Frontend",  searchTags: ["coding"],
+    {handle: "frontend",        title: "Frontend",  searchTags: ["coding"],
      image: {url: "growthImages/coding.png", alt: "Front End, Javascript and Coding"},
     description: {l1: "What is the right <em>Construct</em> for embeddable applications?",
                   l2: "How to <em>Architect</em> parallel processing on browser?",
                   l3: "Explore the full potential of <em>Javascript.</em>"}
     },
-    {handle: "explore",       title: "Projects",  searchTags: ["explore"],
+    {handle: "projects",       title: "Projects",  searchTags: ["explore"],
     image: {url: "growthImages/explore.png", alt: "Projects, Ideas, Explore and Applications"},
     description: {l1: "Curious about building on <em>Ideas</em>?",
                   l2: "And writing your own application development story",
