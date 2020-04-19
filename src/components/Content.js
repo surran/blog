@@ -117,7 +117,7 @@ function Content(props) {
   if (content === "") 
     return null
   else
-    return (<div >
+    return (<div id="content">
               <MetaTags title={name} description={desc} index={true}/>
               <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
