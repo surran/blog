@@ -30,7 +30,7 @@ function getSize(word) {
 }
 
 function Cards(props) {
-  const { cardsList, title, category, description } = props
+  const { cardsList, title, category, description, image } = props
   let metaDesc = "Web Development Solutions in "
   const cards = cardsList.map((card, index)=> {
     const { name, desc, handle, illustration : {text, image} } = card
@@ -72,11 +72,13 @@ function Cards(props) {
             bottomRight:{x:getRandomInt(0,50), y:0},}
   */
   const categoryTitle = category && category.title 
+  const imageUrl = image && image.url
+  console.log(imageUrl)
   if (categoryTitle != "All")
   {
     return (
     <Container>
-      <MetaTags title={`${categoryTitle} - Terminal Notes`} description={metaDesc}/>
+      <MetaTags title={`${categoryTitle} - Terminal Notes`} description={metaDesc} image={imageUrl}/>
       {/*<BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>*/}
       {/*<svg height="210" width="100%" style={{position:"absolute"}}>
         <polygon points="0,0 getRandomInt(),0 160,210 10,200" style={{fill:"#fcfcfc"}} />
