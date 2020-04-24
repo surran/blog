@@ -57,6 +57,6 @@ export const logEvent = (data) => {
         data = {type, resWidth, resHeight, clientHeight, clientWidth, 
                 url, tz, tStamp, tSite, tPage, platform, anchorId, previousPage}
         //console.log(data)
-        postData("https://terminalnotes.com/event/terminalNotes", data)
+        //postData("https://terminalnotes.com/event/terminalNotes", data)
     }
 }
