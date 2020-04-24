@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import MetaTags from './MetaTags'
 import CategoryTabs from './CategoryTabs';
+import { setLastUIElement } from "../utils/eventLogging"
 
 function getColor() {
   const lightcolors = ["pink", "white", "#ccff99", "#ccffff"]
@@ -40,7 +41,7 @@ function Cards(props) {
                 {word.toUpperCase()}
               </IllustrationText>)
     })
-    return (<CardContainer to={`/${handle}`} key={handle} onClick = {() => setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}>
+    return (<CardContainer to={`/${handle}`} key={handle} onClick = {() => {setLastUIElement(undefined); setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}}>
               <Illustration>
                 <IllustrationTextContainer>
                     {words}
@@ -61,7 +62,7 @@ function Cards(props) {
 
   const getHome = () => {
     if (category)
-      return (<Link to="/">All Notes</Link>)
+      return (<Link to="/"  onClick={() => setLastUIElement("BC")}>All Notes</Link>)
     else
       return null
   }
@@ -73,12 +74,12 @@ function Cards(props) {
   */
   const categoryTitle = category && category.title 
   const imageUrl = image && image.url
-  console.log(imageUrl)
-  if (categoryTitle != "All")
+  if (categoryTitle != "All" && cards.length > 0)
   {
     return (
     <Container>
-      <MetaTags title={`${categoryTitle} - Terminal Notes`} description={metaDesc} image={imageUrl}/>
+      <MetaTags title={categoryTitle ? `${categoryTitle} - Terminal Notes` : undefined} 
+                description={metaDesc} image={imageUrl}/>
       {/*<BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>*/}
       {/*<svg height="210" width="100%" style={{position:"absolute"}}>
         <polygon points="0,0 getRandomInt(),0 160,210 10,200" style={{fill:"#fcfcfc"}} />
@@ -94,7 +95,7 @@ function Cards(props) {
     </Container>
     );
   } 
-  return (<MetaTags />);
+  return null;
 }
 
 export default Cards

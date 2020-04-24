@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { setLastUIElement } from '../utils/eventLogging'
 
 function ContentFooter(props) {
 	const title = props.thisNote && props.thisNote.name
@@ -46,7 +47,7 @@ function ContentFooter(props) {
 					Surya Ranjan Shandil
 				</NameContainer>
 				
-				{nextNote &&<NextContainer to={nextUrl} onClick = {() => setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}> 
+				{nextNote &&<NextContainer to={nextUrl} onClick = {() => { setLastUIElement("NX"); setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}}> 
 							<NextPreTitle>Next:&nbsp;</NextPreTitle><NextTitle>{nextTitle}</NextTitle><br />
 							{nextDesc}
 							</NextContainer>}

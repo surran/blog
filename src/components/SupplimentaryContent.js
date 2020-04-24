@@ -6,9 +6,9 @@ const SupplimentaryContent = (props) => {
 	const { handle } = props
 	const content = data[handle] || ""
 	return (<div>
-		       <MetaTags index={false}/>
-		       <div dangerouslySetInnerHTML={{__html:content}} />
-		    </div>)
+				<MetaTags index={false}/>
+				<div dangerouslySetInnerHTML={{__html:content}} />
+			</div>)
 }
 
 export default SupplimentaryContent

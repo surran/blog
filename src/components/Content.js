@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { loadFile } from './../utils/utils'
 import MetaTags from './MetaTags'
 import ContentFooter from "./ContentFooter"
+import { setLastUIElement } from "../utils/eventLogging"
 
 
 function Content(props) {
@@ -71,7 +72,7 @@ function Content(props) {
       const categoryHandle = firstMatchingCategory &&
                               categoryMap[firstMatchingCategory].handle
       if (categoryTitle && categoryHandle)
-          return (<React.Fragment>&nbsp;>&nbsp;<Link to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
+          return (<React.Fragment>&nbsp;>&nbsp;<Link onClick={() => setLastUIElement("BC")} to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
     }
     return ""
   }
@@ -114,12 +115,12 @@ function Content(props) {
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
 
-  if (content === "") 
+  if (content === "" || !name) 
     return null
   else
     return (<div id="content">
               <MetaTags title={name} description={desc} index={true}/>
-              <BreadCrumb><Link to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
+              <BreadCrumb><Link onClick={() => setLastUIElement("BC")} to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
               <ContentFooter thisNote={getNoteObject()}
                              nextNote={getNextNoteObject()}/>

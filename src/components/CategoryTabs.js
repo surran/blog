@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
+import { setLastUIElement } from "../utils/eventLogging"
 
 
 function CategoryTabs(props) {
@@ -15,7 +16,7 @@ function CategoryTabs(props) {
                         catalogMap[urlHandle].tags.some(tag => tag === handle))
     if (pressed)
         pressedFound = true
-    return (<HeaderButton key={handle} to={`/${handle}`} pressed={pressed}>
+    return (<HeaderButton onClick={() => setLastUIElement("H")} key={handle} to={`/${handle}`} pressed={pressed}>
               {title.toUpperCase()}
             </HeaderButton>)})
 

@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import SupplimentaryContent from './components/SupplimentaryContent'
 import { loadFile } from './utils/utils'
 import CategoryTabs from './components/CategoryTabs';
+import { initializeEvents } from "./utils/eventLogging" 
 
 function App() {
 /* Data */
@@ -100,10 +101,12 @@ function App() {
   }
 
   /* on Mount */
-  useEffect(() => {  
-      loadCatalog()
+  useEffect(() => {
+      initializeEvents();
+      loadCatalog();
     },[])
 
+  if (categoryRoutes.length > 0 && SupplimentaryContentRoutes.length > 0)
   return (
       <ErrorBoundary>  
         <Switch>

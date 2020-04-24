@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
 import CategoryTabs from './CategoryTabs';
+import { setLastUIElement } from "../utils/eventLogging"
 
 
 function Header(props) {
@@ -11,7 +12,7 @@ function Header(props) {
   const categoryMenuItems = categories.map(category => {
     const { title, handle } = category
     return (<HeaderMenuItem key={handle}  
-                            onClick={() => setShowHeaderMenu(false)} 
+                            onClick={() => { setLastUIElement("M" + handle); setShowHeaderMenu(false)}} 
                             to={`/${handle}`}>
               {title.toUpperCase()}
             </HeaderMenuItem>)})
@@ -20,7 +21,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <HeaderContainer>
-        <Logo to="/"><LogoText>TERMINAL NOTES_</LogoText><Title>Web Development Solutions</Title></Logo>
+        <Logo to="/" onClick={() => setLastUIElement("L")}><LogoText>TERMINAL NOTES_</LogoText><Title>Web Development Solutions</Title></Logo>
         <CategoryTabsContainer>
           <CategoryTabs categories={categories} catalogMap={catalogMap}/>
         </CategoryTabsContainer>
