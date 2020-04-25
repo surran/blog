@@ -115,11 +115,11 @@ function Content(props) {
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
 
-  if (content === "" || !name) 
+  if (content === "") 
     return null
   else
     return (<div id="content">
-              <MetaTags title={name} description={desc} index={true}/>
+              {name && <MetaTags title={name} description={desc} index={true}/>}
               <BreadCrumb><Link onClick={() => setLastUIElement("BC")} to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
               <ContentFooter thisNote={getNoteObject()}
