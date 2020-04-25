@@ -49,6 +49,7 @@ export const userEvent = (anchorId) => {
 
 function shortenPlatform(pf) {
     if(pf == "Linux x86_64") return "L1"
+    return pf
 }
 
 function getCookie(cname) {
