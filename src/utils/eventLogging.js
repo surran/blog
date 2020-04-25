@@ -8,6 +8,22 @@ export const initializeEvents = () => {
     eventsStore.pageStartTime = eventsStore.siteStartTime;
 }
 
+export const pauseEvents = () => {
+    const d = new Date();
+    eventsStore.pauseStartTime = d.getTime()
+}
+
+export const resumeEvents = () => {
+    if (eventsStore.pauseStartTime !== undefined)
+    {
+        const d = new Date();
+        const currentTime = d.getTime()
+        const pauseTimeSlab = currentTime - eventsStore.pauseStartTime
+        eventsStore.siteStartTime += pauseTimeSlab;
+        eventsStore.pageStartTime += pauseTimeSlab;
+    }
+}
+
 export const setLastUIElement = (elId) => {
     eventsStore.lastUIElement = elId
 }
@@ -20,6 +36,11 @@ export const pageViewEvent = () => {
     eventsStore.pageStartTime = d.getTime();
 }
 
+export const exitEvent = () => {
+    const data = {type: "E", previousPage: eventsStore.previousPage}
+    logEvent(data)
+}
+
 /*
 export const userEvent = (anchorId) => {
     const data = {type: "U", anchorId}
@@ -29,6 +50,22 @@ export const userEvent = (anchorId) => {
 function shortenPlatform(pf) {
     if(pf == "Linux x86_64") return "L1"
 }
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
 export const logEvent = (data) => {
     if (eventsStore.siteStartTime) {
@@ -47,16 +84,12 @@ export const logEvent = (data) => {
         const tSite = Math.round((currentTime - eventsStore.siteStartTime)/1000)
         const platform = shortenPlatform(navigator.platform)
         const anchorId = eventsStore.lastUIElement
-        /*
-        device: {
-            type: String
-        },
-        ip: {
-            type: String
-        }*/
         data = {type, resWidth, resHeight, clientHeight, clientWidth, 
                 url, tz, tStamp, tSite, tPage, platform, anchorId, previousPage}
         //console.log(data)
-        postData("/api/event/terminalNotes", data)
+        if (getCookie("mode") !== "dev")
+            postData("/api/event/terminalNotes", data)
+        else
+            console.log(data)
     }
 }

@@ -9,7 +9,7 @@ import Footer from './components/Footer'
 import SupplimentaryContent from './components/SupplimentaryContent'
 import { loadFile } from './utils/utils'
 import CategoryTabs from './components/CategoryTabs';
-import { initializeEvents } from "./utils/eventLogging" 
+import { initializeEvents, pauseEvents, resumeEvents, exitEvent } from "./utils/eventLogging" 
 
 function App() {
 /* Data */
@@ -100,10 +100,24 @@ function App() {
     loadFile("https://surran.github.io/mark-downs/index.json", onSuccess) 
   }
 
+  const attachTabCHangeListener = () => {
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden){
+          pauseEvents()
+      } else {
+          resumeEvents()
+      }
+    });
+    window.addEventListener('beforeunload', function(event) {
+      exitEvent()
+    });
+  }
+
   /* on Mount */
   useEffect(() => {
       initializeEvents();
       loadCatalog();
+      attachTabCHangeListener();
     },[])
 
   if (categoryRoutes.length > 0 && SupplimentaryContentRoutes.length > 0)
