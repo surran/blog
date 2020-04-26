@@ -24,6 +24,29 @@ function MetaTags(props) {
     			<meta property="og:title" content={title} />
  				<meta property="og:description" content={description} />
  				<meta name="robots" content={index ? "index" : "noindex"} />
+				{/*<script type="application/ld+json">
+					{``}
+					{`{
+						"@context": "https://schema.org",
+						"@type": "BreadcrumbList",
+						"itemListElement": [{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Books",
+							"item": "https://terminalnotes.com/"
+						},{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "Science Fiction",
+							"item": "https://terminalnotes.com/backend"
+						},{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "Award Winners"
+						}]
+					}`}
+
+				</script>*/}
     		</Helmet>)
 }
 
