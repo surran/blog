@@ -24,7 +24,7 @@ router.get('/', serverCategoryRenderer)
 
 categories.map(category => {
     const categoryHandle = category.handle
-    router.get(`/${categoryHandle}/`, serverCategoryRenderer)
+    router.get(`/${categoryHandle}`, serverCategoryRenderer)
     router.get(`/${categoryHandle}/*`, serverNoteRenderer)
 })
 
