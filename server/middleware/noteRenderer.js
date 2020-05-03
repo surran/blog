@@ -44,7 +44,7 @@ export default (req, res, next) => {
         }
         return res.send(
             htmlData.replace(
-                '<meta content=””>',
+                '<meta>',
                 `   <meta charset="utf-8" />
                     <title>${title}</title>
                     <meta name="google-site-verification" content="dLqzs6Uj-FT1CFOtyxv8k40FmEHuEJa75U2ryXnjUyg" />
@@ -60,7 +60,7 @@ export default (req, res, next) => {
                     <meta name="twitter:title" content="${title}"/>
                     <meta name="twitter:description" content="${desc}" />
                     <meta name="twitter:image" content="${image}"/>`
-            ).replace('<script></script>', `<script>window.categories = ${JSON.stringify(categories)}</script>`)
+            )
         );
         });
         // inject the rendered app into our html and send it
