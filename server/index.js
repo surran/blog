@@ -6,7 +6,7 @@ import serverCategoryRenderer from './middleware/categoryRenderer';
 
 import categories from "./../src/data/categories";
 
-const PORT = 3001;
+const PORT = 8082;
 const path = require('path');
 
 // initialize the application and create the routes
@@ -36,7 +36,7 @@ categories.map(category => {
 
 // other static resources should just be served as they are
 router.use(express.static(
-    path.resolve(__dirname, '..', 'build'),
+    path.resolve(__dirname, '..', 'build-stable'),
     { maxAge: '30d' },
 ));
 

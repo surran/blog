@@ -6,7 +6,7 @@ const fs = require("fs");
 export default (req, res, next) => {
 
     // point to the html file created by CRA's build tool
-    const filePath = path.resolve(__dirname, '..', '..', 'build', 'index.html');
+    const filePath = path.resolve(__dirname, '..', '..', 'build-stable', 'index.html');
 
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
