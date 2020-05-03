@@ -2,18 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
 import { setLastUIElement } from "../utils/eventLogging"
-
+import { extractDataFromUrl } from "../utils/utils"
 
 function CategoryTabs(props) {
   const { categories, location: {pathname}, catalogMap, scrollableTabs } = props
   let pressedFound = false;
   const categoryTabs = categories.map(category => {
     const { title, handle } = category
-    const urlHandle = pathname.substring(1)
-    const pressed = !pressedFound &&
-                    (urlHandle === handle || 
-                        catalogMap[urlHandle] && 
-                        catalogMap[urlHandle].tags.some(tag => tag === handle))
+    const { categoryHandle } = extractDataFromUrl()
+    const pressed = !pressedFound && categoryHandle === handle
     if (pressed)
         pressedFound = true
     return (<HeaderButton onClick={() => setLastUIElement("H")} key={handle} to={`/${handle}`} pressed={pressed}>

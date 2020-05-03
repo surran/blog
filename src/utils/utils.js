@@ -1,4 +1,6 @@
-  export const loadFile = (filePath, successCallback, failureCallback) => {
+import SUPPLIMENTARY_CONTENT from '../data/supplimentaryContent'
+
+export const loadFile = (filePath, successCallback, failureCallback) => {
     fetch(filePath).then(function(res) {
           if (res.status >= 400) {
             if(failureCallback)
@@ -15,6 +17,38 @@
         if (successCallback) 
           successCallback(responseData)
       });
+  }
+
+  const isReservedWordFunction = (word) => {
+    return SUPPLIMENTARY_CONTENT.some(rwordData => rwordData.handle == word)
+  }
+
+  const isNoIndexFunction = (word) => {
+    return SUPPLIMENTARY_CONTENT.some(rwordData => rwordData.handle == word && rwordData.noindex)
+  }
+
+  export const extractDataFromUrl = () => {
+    const urlComponents = window.location.pathname.split("/")
+    let urlHandle = false, isReservedWord = false, isNoIndex = false, categoryHandle = false;
+    if (urlComponents.length >= 2)
+    {
+      if (urlComponents.length >= 3) urlHandle = urlComponents[2]
+      categoryHandle = urlComponents[1]
+      isReservedWord = categoryHandle && isReservedWordFunction(categoryHandle)
+      isNoIndex =  categoryHandle && isNoIndexFunction(categoryHandle)
+    }
+    return { urlHandle, categoryHandle, isReservedWord, isNoIndex }
+  }
+
+  export function getCategoryFromNoteHandle(NoteHandle, catalogMap, categoryMap)
+  {
+    const noteObject = catalogMap[NoteHandle]
+    if (noteObject && noteObject.tags && noteObject.tags.length > 0 )
+    {
+      const matchingCategories = noteObject.tags.filter(tag => tag in categoryMap)
+      const firstMatchingCategory = (matchingCategories.length > 0) ? matchingCategories[0] : false
+      return firstMatchingCategory
+    }
   }
 
   // Example POST method implementation:

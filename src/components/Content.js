@@ -5,34 +5,14 @@ import { loadFile } from './../utils/utils'
 import MetaTags from './MetaTags'
 import ContentFooter from "./ContentFooter"
 import { setLastUIElement } from "../utils/eventLogging"
+import { extractDataFromUrl } from "../utils/utils"
 
 
 function Content(props) {
-  const { location, reservedWords } = props
+  const { location} = props
   const [content, setContent] = useState("")
   const [memo, setMemo] = useState({})
   const { catalogMap, categoryMap, catalog } = props
-
-  const isReservedWordFunction = (word) => {
-    return reservedWords.some(rword => rword == word)
-  }
-
-  const isNoIndexFunction = (word) => {
-    return reservedWords.some(rword => rword == word && rword.noindex)
-  }
-
-  const extractDataFromUrl = () => {
-    const urlComponents = window.location.pathname.split("/")
-    let urlHandle = false, isReservedWord = false, inMemo = false, isNoIndex = false
-    if (urlComponents.length >= 2)
-    {
-      urlHandle = urlComponents[1]
-      isReservedWord = urlHandle && isReservedWordFunction(urlHandle)
-      isNoIndex = urlHandle && isNoIndexFunction(urlHandle)
-      inMemo = !isReservedWord && urlHandle in memo
-    }
-    return { urlHandle, isReservedWord, inMemo, isNoIndex }
-  }
 
   const loadPost = (urlHandle) => {
     if(urlHandle !== "")
@@ -51,7 +31,8 @@ function Content(props) {
 
   const loadPostIfApplicable = () => {
     const fromUrl = extractDataFromUrl()
-    const {urlHandle, isReservedWord, inMemo} = fromUrl
+    const {urlHandle, isReservedWord} = fromUrl
+    const inMemo = !isReservedWord && urlHandle in memo
     if (!urlHandle || isReservedWord) setContent("")
     else if (inMemo) setContent(memo[urlHandle])
     else loadPost(urlHandle)
@@ -61,6 +42,7 @@ function Content(props) {
 
   const getCategory = () => {
     const fromUrl = extractDataFromUrl()
+    const { categoryHandle } = fromUrl
     const noteObject = catalogMap[fromUrl.urlHandle]
     if (noteObject && noteObject.tags && noteObject.tags.length > 0 )
     {
@@ -72,7 +54,7 @@ function Content(props) {
       const categoryHandle = firstMatchingCategory &&
                               categoryMap[firstMatchingCategory].handle
       if (categoryTitle && categoryHandle)
-          return (<React.Fragment>&nbsp;>&nbsp;<Link onClick={() => setLastUIElement("BC")} to={categoryHandle}>{categoryTitle}</Link></React.Fragment>)
+          return (<React.Fragment>&nbsp;>&nbsp;<Link onClick={() => setLastUIElement("BC")} to={`/${categoryHandle}`}>{categoryTitle}</Link></React.Fragment>)
     }
     return ""
   }
@@ -123,6 +105,8 @@ function Content(props) {
               <BreadCrumb><Link onClick={() => setLastUIElement("BC")} to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
               <ContentFooter thisNote={getNoteObject()}
+                             catalogMap={catalogMap}
+                             categoryMap={categoryMap}
                              nextNote={getNextNoteObject()}/>
             </div>)
 }

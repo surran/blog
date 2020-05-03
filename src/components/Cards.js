@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import MetaTags from './MetaTags'
 import CategoryTabs from './CategoryTabs';
+import { getCategoryFromNoteHandle } from '../utils/utils'
 import { setLastUIElement } from "../utils/eventLogging"
 
 function getColor() {
@@ -31,17 +32,19 @@ function getSize(word) {
 }
 
 function Cards(props) {
-  const { cardsList, title, category, description, image } = props
+  const { cardsList, title, category, description, image, catalogMap, categoryMap } = props
+  
   let metaDesc = "Web Development Solutions in "
   const cards = cardsList.map((card, index)=> {
     const { name, desc, handle, illustration : {text, image} } = card
+    const categoryHandle = category && category.handle || getCategoryFromNoteHandle(handle, catalogMap, categoryMap)
     metaDesc += (index == 0 ? "" : (index == cardsList.length - 1) ? " and " : ", ") + text
     const words = text.split(" ").map(word => {
       return (<IllustrationText color={getColor()} fontSize={getSize(word)}>
                 {word.toUpperCase()}
               </IllustrationText>)
     })
-    return (<CardContainer to={`/${handle}`} key={handle} onClick = {() => {setLastUIElement(undefined); setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}}>
+    return (<CardContainer to={`/${categoryHandle}/${handle}`} key={handle} onClick = {() => {setLastUIElement(undefined); setTimeout(() => {document.getElementById("outer-container").scrollTop = 0}, 0)}}>
               <Illustration>
                 <IllustrationTextContainer>
                     {words}

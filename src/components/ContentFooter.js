@@ -2,13 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { setLastUIElement } from '../utils/eventLogging'
+import { getCategoryFromNoteHandle } from '../utils/utils'
+
+
+function getNextNoteData(nextNote, catalogMap, categoryMap) {
+	if ( nextNote && nextNote.handle) 
+	{
+		const nextHandleCategory = getCategoryFromNoteHandle(nextNote.handle, catalogMap, categoryMap)
+		const nextUrl = `/${nextHandleCategory}/${nextNote.handle}`
+		const nextTitle = nextNote && nextNote.name
+		const nextDesc = nextNote && nextNote.desc
+		return {nextUrl, nextDesc, nextTitle}
+	}
+	return {}
+}
 
 function ContentFooter(props) {
 	const title = props.thisNote && props.thisNote.name
-	const { nextNote } = props
-	const nextTitle = props.nextNote && props.nextNote.name
-	const nextDesc = props.nextNote && props.nextNote.desc
-	const nextUrl = props.nextNote && props.nextNote.handle && `/${props.nextNote.handle}`
+	const { nextNote, categoryMap, catalogMap } = props
+	const { nextUrl, nextTitle, nextDesc } = getNextNoteData(nextNote, catalogMap, categoryMap)
 	const currentUrl = window.location.href;
 	const shareURL = {
 		facebook: `https://www.facebook.com/sharer/sharer.php?caption=${title}&u=${currentUrl}`,
@@ -29,7 +41,7 @@ function ContentFooter(props) {
 									   						 event, 
 									   						 "twitter-share", 
 									   						 {width:550, height: 235})}}>
-						   <SocialIcon src="twitter.svg"/>
+						   <SocialIcon src="/twitter.svg"/>
 						</a>
 						<a class="facebook" 
 						   href={shareURL.facebook} 
@@ -37,13 +49,13 @@ function ContentFooter(props) {
 									   						 event, 
 									   						 "facebook-share", 
 									   						 {width:580, height: 296})}}>
-						   <SocialIcon src="facebook.svg" style={{backgroundColor: "white", width: "45px"}}/>
+						   <SocialIcon src="/facebook.svg" style={{backgroundColor: "white", width: "45px"}}/>
 						</a>
 					</div>
 				</SocialContainer>
 				<hr />
 				<NameContainer>
-				    <MeImg src="me.jpg" />
+				    <MeImg src="/me.jpg" />
 					Surya Ranjan Shandil
 				</NameContainer>
 				
