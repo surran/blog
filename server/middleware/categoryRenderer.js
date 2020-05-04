@@ -21,9 +21,12 @@ export default (req, res, next) => {
         let image = ""
         if (category.length > 0)
         {
-            title = category[0].title + " - Terminal Notes"
-            desc = category[0].desc
-            image = ""//category[0].image.url
+            if (category[0].title == "All")
+                title = "Terminal Notes - Web Development Solutions"
+            else
+                title = category[0].title + " - Terminal Notes"
+            desc = category[0].seoDescription
+            image = category[0] && category[0].image && category[0].image.url || ""
         }
         return res.send(
             htmlData.replace(
