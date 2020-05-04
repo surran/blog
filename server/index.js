@@ -3,6 +3,7 @@ import express from 'express';
 // we'll talk about this in a minute:
 import serverNoteRenderer from './middleware/noteRenderer';
 import serverCategoryRenderer from './middleware/categoryRenderer';
+import supplementaryRenderer from './middleware/supplementaryRenderer';
 
 import categories from "./../src/data/categories";
 
@@ -29,9 +30,9 @@ categories.map(category => {
 })
 
 // Special Page Rendered
-//router.get('/terms-of-use', supplimentaryRouter)
-//router.get('/privacy-policy', supplimentaryRouter)
-
+router.get('/terms-of-use', supplementaryRenderer)
+router.get('/privacy-policy', supplementaryRenderer)
+router.get('/sitemap.txt', supplementaryRenderer)
 
 
 // other static resources should just be served as they are
