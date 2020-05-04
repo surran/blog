@@ -1,6 +1,6 @@
 export default [
     {handle: "",              title: "All",       searchTags: [""],
-     seoDescription: "Notes on various aspects of Web development. Scenarios and solutions in infrastructure, back end, front end and user growth",
+     seoDescription: "Notes on various aspects of Web development. Scenarios and solutions in infrastructure, backend, frontend and user growth.",
      image: {url: "https://www.terminalnotes.com/growthImages/all.png"},
      description: {l1: "Setting up your first <em>Website</em>?",
                    l2: "Or setting sight for your <em>First 1000 Users</em>?",
