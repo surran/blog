@@ -305,7 +305,7 @@ code *,pre *,samp * {
 }
 
 blockquote {
-    color: rgba(0,0,0,.5);
+    color: #ea7b12
     padding-left: 1.5em;
     border-left: 5px solid rgba(0,0,0,.1)
 }
