@@ -29,7 +29,7 @@ export default (req, res, next) => {
         rest.getJSON(options, (statusCode, result) => {
         // I could work with the resulting HTML/JSON here. I could also just return it
         //console.log(`onResult: (${statusCode})\n\n${JSON.stringify(result)}`);
-        console.log(req.path.split("/")[1])
+        const category = req.path.split("/")[1]
         const note = result.filter(note => `${note.handle}` == req.path.split("/")[2])
         //res.statusCode = statusCode;
         console.log(JSON.stringify(note))
@@ -59,6 +59,7 @@ export default (req, res, next) => {
                     <meta name="twitter:creator" content="@surranshan"/>
                     <meta name="twitter:title" content="${title}"/>
                     <meta name="twitter:description" content="${desc}" />
+                    <link rel="canonical" href="https://www.terminalnotes.com/${category}/${note[0].handle}">
                     <meta name="twitter:image" content="${image}"/>`
             )
         );

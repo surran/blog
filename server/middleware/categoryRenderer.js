@@ -19,6 +19,7 @@ export default (req, res, next) => {
         let title = ""
         let desc = ""
         let image = ""
+        let relPath = ""
         if (category.length > 0)
         {
             if (category[0].title == "All")
@@ -27,12 +28,14 @@ export default (req, res, next) => {
                 title = category[0].title + " - Terminal Notes"
             desc = category[0].seoDescription
             image = category[0] && category[0].image && category[0].image.url || ""
+            relPath = `/${category[0].handle}`
         }
         return res.send(
             htmlData.replace(
                 '<meta>',
                 `   <meta charset="utf-8" />
                 <title>${title}</title>
+                <link rel="canonical" href="https://www.terminalnotes.com${relPath}">
                 <meta name="google-site-verification" content="dLqzs6Uj-FT1CFOtyxv8k40FmEHuEJa75U2ryXnjUyg" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content="#FFFFFF" />
