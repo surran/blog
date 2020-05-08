@@ -40,7 +40,7 @@ export default (req, res, next) => {
         {
             title = note[0].name
             desc = note[0].desc
-            image = `https://terminalnotes.com/social-share-postcards/${note[0].handle}.png`
+            image = `https://surran.github.io/mark-downs/social-share-postcards/${note[0].handle}.png`
         }
         return res.send(
             htmlData.replace(
