@@ -16,41 +16,39 @@ export default (req, res, next) => {
 
         const category = categories.filter(category => `/${category.handle}` == req.path)
         
-        let title = ""
-        let desc = ""
-        let image = ""
-        let relPath = ""
         if (category.length > 0)
         {
+            let title = ""
             if (category[0].title == "All")
                 title = "Terminal Notes - Web Development Solutions"
             else
                 title = category[0].title + " - Terminal Notes"
-            desc = category[0].seoDescription
-            image = category[0] && category[0].image && category[0].image.url || ""
-            relPath = `/${category[0].handle}`
+            let desc = category[0].seoDescription
+            let image = category[0] && category[0].image && category[0].image.url || ""
+            let relPath = `/${category[0].handle}`
+
+            return res.send(
+                htmlData.replace(
+                    '<meta>',
+                    `   <meta charset="utf-8" />
+                    <title>${title}</title>
+                    <link rel="canonical" href="https://www.terminalnotes.com${relPath}">
+                    <meta name="google-site-verification" content="dLqzs6Uj-FT1CFOtyxv8k40FmEHuEJa75U2ryXnjUyg" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <meta name="theme-color" content="#FFFFFF" />
+                    <meta name="og:title" content="${title}" />
+                    <meta name="og:image" content="${image}" />
+                    <meta name="description" content="${desc}" />       
+                    <meta name="og:description" content="${desc}" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:site" content="@surranshan"/>
+                    <meta name="twitter:creator" content="@surranshan"/>
+                    <meta name="twitter:title" content="${title}"/>
+                    <meta name="twitter:description" content="${desc}" />
+                    <meta name="twitter:image" content="${image}"/>`
+                )
+            );
         }
-        return res.send(
-            htmlData.replace(
-                '<meta>',
-                `   <meta charset="utf-8" />
-                <title>${title}</title>
-                <link rel="canonical" href="https://www.terminalnotes.com${relPath}">
-                <meta name="google-site-verification" content="dLqzs6Uj-FT1CFOtyxv8k40FmEHuEJa75U2ryXnjUyg" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="theme-color" content="#FFFFFF" />
-                <meta name="og:title" content="${title}" />
-                <meta name="og:image" content="${image}" />
-                <meta name="description" content="${desc}" />       
-                <meta name="og:description" content="${desc}" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:site" content="@surranshan"/>
-                <meta name="twitter:creator" content="@surranshan"/>
-                <meta name="twitter:title" content="${title}"/>
-                <meta name="twitter:description" content="${desc}" />
-                <meta name="twitter:image" content="${image}"/>`
-            )
-        );
-        
+        return res.status(404).send(htmlData)
     });
 }

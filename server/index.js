@@ -34,7 +34,6 @@ router.get('/terms-of-use', supplementaryRenderer)
 router.get('/privacy-policy', supplementaryRenderer)
 router.get('/sitemap.txt', supplementaryRenderer)
 
-
 // other static resources should just be served as they are
 router.use(express.static(
     path.resolve(__dirname, '..', 'build-stable'),
@@ -43,6 +42,8 @@ router.use(express.static(
 
 // tell the app to use the above rules
 app.use(router);
+
+app.get('*', serverCategoryRenderer);
 
 // start the app
 app.listen(PORT, (error) => {
