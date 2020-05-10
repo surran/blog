@@ -97,10 +97,10 @@ function Content(props) {
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
   if (content === "") 
-    return (<div style={{textAlign: "center", padding: "50px 10px", lineHeight: "2"}}>
+    return (null/*<div style={{textAlign: "center", padding: "50px 10px", lineHeight: "2"}}>
               <div style={{fontSize: "26px"}}><b>404 - Page not found.</b></div>
               <div> Visit our <Link to="/">home page</Link> to view all available content.</div>
-            </div>)
+            </div>*/)
   else
     return (<div id="content">
               {name && <MetaTags title={name} description={desc} index={true}/>}
