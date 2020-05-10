@@ -106,7 +106,6 @@ function Content(props) {
 
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
-  console.log(content)
   if (content === "") 
     return (null)
   if (content === "API Failure" || content === "Not Found") 
