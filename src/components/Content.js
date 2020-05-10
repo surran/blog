@@ -18,12 +18,15 @@ function Content(props) {
     if(urlHandle !== "")
     {
       const onSuccess = (data) => {
-        let newMemo = {...memo}
-        newMemo[urlHandle] = data
-        setMemo(newMemo)
-        setContent(data)
+        if (data)
+        {
+          let newMemo = {...memo}
+          newMemo[urlHandle] = data
+          setMemo(newMemo)
+          setContent(data)
+        }
       }
-      const onAPIFailure = () => setContent("This page isn't available")
+      const onAPIFailure = () => setContent("API Failure")
       const onCDNFailure = () => loadFile(`https://surran.github.io/mark-downs/${urlHandle}?`, onSuccess, onAPIFailure)
       loadFile(`https://surran.github.io/mark-downs/${urlHandle}`, onSuccess, onCDNFailure)
     }
@@ -31,9 +34,16 @@ function Content(props) {
 
   const loadPostIfApplicable = () => {
     const fromUrl = extractDataFromUrl()
-    const {urlHandle, isReservedWord} = fromUrl
+    const {urlHandle, isReservedWord, categoryHandle} = fromUrl
     const inMemo = !isReservedWord && urlHandle in memo
-    if (!urlHandle || isReservedWord) setContent("")
+
+    if (!urlHandle) 
+    {
+      if (!categoryHandle || categoryHandle in categoryMap || isReservedWord) 
+        setContent("")
+      else
+        setContent("Not Found")
+    }
     else if (inMemo) setContent(memo[urlHandle])
     else loadPost(urlHandle)
   }
@@ -96,11 +106,14 @@ function Content(props) {
 
   const noteObject = getNoteObject() || {}
   const {name, desc} = noteObject
+  console.log(content)
   if (content === "") 
-    return (null/*<div style={{textAlign: "center", padding: "50px 10px", lineHeight: "2"}}>
+    return (null)
+  if (content === "API Failure" || content === "Not Found") 
+    return(<div style={{textAlign: "center", padding: "50px 10px", lineHeight: "2"}}>
               <div style={{fontSize: "26px"}}><b>404 - Page not found.</b></div>
-              <div> Visit our <Link to="/">home page</Link> to view all available content.</div>
-            </div>*/)
+              <div> Visit <Link to="/">home page</Link> to view all available content.</div>
+            </div>)
   else
     return (<div id="content">
               {name && <MetaTags title={name} description={desc} index={true}/>}
