@@ -308,7 +308,10 @@ blockquote {
     color: #b65410;
     font-size: 17px;
     padding-left: 1.5em;
-    border-left: 5px solid rgba(0,0,0,.1)
+    border: 1px solid #3b3b65;
+    padding: 0px 25px;
+    border-radius: 5px;
+    border-left: 5px solid #b956e4;
 }
 
 .app--dark .layout__panel--editor blockquote,.app--dark .layout__panel--preview blockquote {
