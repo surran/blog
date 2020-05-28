@@ -21,7 +21,7 @@ function Footer(props) {
                 c-3.1,0-6.1-0.3-9.1-0.9c6.1,19.2,23.9,33.1,45,33.5c-16.5,12.9-37.3,20.6-59.9,20.6c-3.9,0-7.7-0.2-11.5-0.7
                 C110.8,297.5,136.2,305.5,163.4,305.5"/>
             </TwitterIcon>  
-        <a href="https://twitter.com/surranshan" target="_blank">@surranshan</a></Right>
+        <RLink href="https://twitter.com/surranshan" target="_blank">@surranshan</RLink></Right>
     		</Container>)
 }
 
