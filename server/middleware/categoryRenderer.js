@@ -30,12 +30,8 @@ export default (req, res, next) => {
             return res.send(
                 htmlData.replace(
                     '<meta>',
-                    `   <meta charset="utf-8" />
-                    <title>${title}</title>
+                    `<title>${title}</title>
                     <link rel="canonical" href="https://www.terminalnotes.com${relPath}">
-                    <meta name="google-site-verification" content="dLqzs6Uj-FT1CFOtyxv8k40FmEHuEJa75U2ryXnjUyg" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <meta name="theme-color" content="#FFFFFF" />
                     <meta name="og:title" content="${title}" />
                     <meta name="og:image" content="${image}" />
                     <meta name="description" content="${desc}" />       

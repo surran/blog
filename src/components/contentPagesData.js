@@ -1,4 +1,4 @@
-export const data = {"terms-of-use" : `<h4>Terms of use for terminalnotes.com</h4>
+export const data = {"terms-of-use" : `<h3>Terms of use for terminalnotes.com</h3>
 <p>While using this site, you agree to have read and accepted all the information on this page.
 
 <h4>Copyright Information</h4>
@@ -31,7 +31,7 @@ terminalnotes.com contains links to other sites. We are not responsible for any 
 
 
 
-"privacy-policy": `<h4>Privacy Statement for terminalnotes.com</h4><p>
+"privacy-policy": `<h3>Privacy Statement for terminalnotes.com</h3><p>
 
 We do not collect any personal information from our users. Visits are logged for aggregate statistics and diagnosis.
 The website terminalnotes.com requires no user registration. Users are free to visit terminalnotes.com, and navigate all its pages.</p><p>
@@ -84,4 +84,22 @@ You can usually switch cookies off by adjusting your browser settings to stop it
 terminalnotes.com contains links to other sites. We are not responsible for the privacy practices or the content of such Web sites. This privacy document applies only to terminalnotes.com.</p><p>
 <!--
 Contacting the Web Site
-For any questions about this privacy statement</p>-->`}
+For any questions about this privacy statement</p>-->`, 
+
+
+"founder": `<p><b style="font-size: larger">Surya Ranjan Shandil</b> is a 33 year old computer programmer and artist from Bengaluru, India. He is the founder and owner of Terminalnotes.com and has worked in capacity of software developer at Ck12.org and Ansys Inc.</p>
+
+<p>His core interest lies in Web architecture. He has designed key systems in large (100 million+ user base) websites like <a href="https://www.ck12.org">ck12.org</a>. He also actively writes on all aspects of web development & systems design in <a href="https://www.terminalnotes.com">terminalnotes.com</a>. Some other privately owned internet products run by him are:</p>
+
+
+<ul>
+    <li><a href="http://www.infomaps.org">Infomaps.org</a>: An infographical journey through India.</li>
+    <li><a href="http://www.mouchak.org>Mouchak.org</a>: Poetry with line by line translations in 9 indian languages.</li>
+</ul>
+<p>In past he ran a startup company in education technology for a period of 1 year. He has also worked extensively for 5+ years on 3D computer graphics at Ansys Inc. Some interesting visual side projects executed by him are:
+<ul>
+    <li><a href="https://www.terminalnotes.com/products/space-painter>Space Painter</a>: Realistic looking photographs of deep space that are actually not real.</li>
+    <li><a href="https://www.suryaranjanshandil.com">Suryaranjanshandil.com</a>: Personal portfolio of paintings.</li>
+</ul>
+<p>For correspondence you can write to him at <a href="mailto:suryaran@gmail.com">suryaran@gmail.com</a></p>
+</p><img src="meLarge.jpg"/>`}

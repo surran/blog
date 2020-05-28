@@ -33,6 +33,7 @@ categories.map(category => {
 router.get('/terms-of-use', supplementaryRenderer)
 router.get('/privacy-policy', supplementaryRenderer)
 router.get('/sitemap.txt', supplementaryRenderer)
+router.get('/founder', supplementaryRenderer)
 
 // other static resources should just be served as they are
 router.use(express.static(
