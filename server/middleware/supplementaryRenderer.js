@@ -26,7 +26,7 @@ export default (req, res, next) => {
 
             const title = "Founder - Terminalnotes.com"
             const desc = "Surya Ranjan Shandil is a 33 year old computer programmer and artist from Bengaluru, India. He is the founder and owner of Terminalnotes.com and has worked in capacity of software developer at Ck12.org and Ansys Inc."
-            const image = "https://www.terminalnotes.com/meLarge.jpg"
+            const image = "https://www.terminalnotes.com/srsSocial.jpg"
 
             return res.send(
                 htmlData.replace(
