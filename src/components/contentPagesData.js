@@ -89,7 +89,7 @@ For any questions about this privacy statement</p>-->`,
 
 "founder": `<p><b style="font-size: larger">Surya Ranjan Shandil</b> is a 33 year old computer programmer and artist from Bengaluru, India. He is the founder and owner of Terminalnotes.com and has worked in capacity of software developer at Ck12.org and Ansys Inc.</p>
 
-<p>His core interest lies in Web architecture. He has designed key systems in large (100 million+ user base) websites like <a href="https://www.ck12.org" target="_blank">ck12.org</a>. He also actively writes on all aspects of web development & systems design in <a href="https://www.terminalnotes.com">terminalnotes.com</a>. Some other privately owned internet products run by him are:</p>
+<p>His core interest lies in Web architecture. He has designed key systems in large (100 million+ user base) websites like <a href="https://www.ck12.org" target="_blank">ck12.org</a>. He also actively writes on all aspects of web development in <a href="https://www.terminalnotes.com"  target="_blank">terminalnotes.com</a>. Some other privately owned internet products run by him are:</p>
 
 
 <ul>
@@ -101,5 +101,5 @@ For any questions about this privacy statement</p>-->`,
     <li><a href="https://www.terminalnotes.com/products/space-painter"  target="_blank">Space Painter</a>: Realistic looking photographs of deep space that are actually not real.</li>
     <li><a href="https://www.suryaranjanshandil.com"  target="_blank">Suryaranjanshandil.com</a>: Personal portfolio of paintings.</li>
 </ul>
-<p>For correspondence you can write to him at <a href="mailto:suryaran@gmail.com">suryaran@gmail.com</a></p>
+<p>For correspondence you can write to him at <b>suryaran@gmail.com</b></p>
 </p><img src="meLarge.jpg"/>`}
