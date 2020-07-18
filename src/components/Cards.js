@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components'
-import MetaTags from './MetaTags'
+import MetaTags from '@surran/meta-tags'
 import CategoryTabs from './CategoryTabs';
 import { getCategoryFromNoteHandle } from '../utils/utils'
-import { setLastUIElement } from "../utils/eventLogging"
+import { setLastUIElement } from "@surran/events" 
 
 function getColor() {
   const lightcolors = ["pink", "white", "#ccff99", "#ccffff"]
@@ -82,7 +82,8 @@ function Cards(props) {
     return (
     <Container>
       <MetaTags title={categoryTitle ? `${categoryTitle} - Terminal Notes` : undefined} 
-                description={metaDesc} image={imageUrl}/>
+                description={metaDesc} 
+                image={imageUrl}/>
       {/*<BreadCrumb>{getHome()}{getCategoryTitle()}</BreadCrumb>*/}
       {/*<svg height="210" width="100%" style={{position:"absolute"}}>
         <polygon points="0,0 getRandomInt(),0 160,210 10,200" style={{fill:"#fcfcfc"}} />

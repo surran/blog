@@ -2,9 +2,9 @@ import React, { useEffect , useState } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components'
 import { loadFile } from './../utils/utils'
-import MetaTags from './MetaTags'
+import MetaTags from '@surran/meta-tags'
 import ContentFooter from "./ContentFooter"
-import { setLastUIElement } from "../utils/eventLogging"
+import { setLastUIElement } from "@surran/events" 
 import { extractDataFromUrl } from "../utils/utils"
 
 
@@ -115,7 +115,9 @@ function Content(props) {
             </div>)
   else
     return (<div id="content">
-              {name && <MetaTags title={name} description={desc} index={true}/>}
+              {name && <MetaTags title={name} 
+                                 description={desc} 
+                                 index={true}/>}
               <BreadCrumb><Link onClick={() => setLastUIElement("BC")} to="/">All Notes</Link>{getCategory()}{getNoteTitle()}</BreadCrumb>
               <div dangerouslySetInnerHTML={{__html:content}} />
               <ContentFooter thisNote={getNoteObject()}

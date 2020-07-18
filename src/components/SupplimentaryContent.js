@@ -1,7 +1,7 @@
 import React from 'react';
 import { data } from "./contentPagesData"
 import styled from 'styled-components'
-import MetaTags from './MetaTags'
+import MetaTags from '@surran/meta-tags'
 
 const SupplimentaryContent = (props) => {
 	const { handle } = props

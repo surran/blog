@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { setLastUIElement } from '../utils/eventLogging'
+import { setLastUIElement } from "@surran/events" 
 import { getCategoryFromNoteHandle } from '../utils/utils'
 
 

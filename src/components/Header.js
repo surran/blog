@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from "react-router-dom";
 import styled from 'styled-components'
 import CategoryTabs from './CategoryTabs';
-import { setLastUIElement } from "../utils/eventLogging"
+import { setLastUIElement } from "@surran/events"
 
 
 function Header(props) {
@@ -23,7 +23,7 @@ function Header(props) {
       <HeaderContainer>
         <Logo to="/" onClick={() => setLastUIElement("L")}><LogoText>TERMINAL NOTES_</LogoText><Title>Web Development Solutions</Title></Logo>
         <CategoryTabsContainer>
-          <CategoryTabs categories={categories} catalogMap={catalogMap}/>
+          <CategoryTabs categories={categories}/>
         </CategoryTabsContainer>
         {/*<MenuIcon onClick={() => setShowHeaderMenu(!showHeaderMenu)}>
           <svg height="50" width="50">

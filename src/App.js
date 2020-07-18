@@ -5,13 +5,13 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import Cards from './components/Cards'
 import Content from './components/Content'
 import Header from './components/Header'
-import Footer from './components/Footer'
+import Footer from '@surran/footer'
 import CATEGORIES from './data/categories'
 import SUPPLIMENTARY_CONTENT from './data/supplimentaryContent'
 import SupplimentaryContent from './components/SupplimentaryContent'
 import { loadFile } from './utils/utils'
 import CategoryTabs from './components/CategoryTabs';
-import { initializeEvents, pauseEvents, resumeEvents, exitEvent } from "./utils/eventLogging" 
+import { initializeEvents, pauseEvents, resumeEvents, exitEvent } from "@surran/events" 
 
 function App() {
 /* Data */
@@ -84,7 +84,7 @@ function App() {
           
           <OuterContainer id = "outer-container">
             <CategoryTabsContainer>
-              <CategoryTabs  categories={CATEGORIES} catalogMap={catalogMap} scrollableTabs/> 
+              <CategoryTabs  categories={CATEGORIES} scrollableTabs/> 
             </CategoryTabsContainer>
             <Container >          
               <Route exact path={"/"} 
@@ -102,7 +102,30 @@ function App() {
                                                catalog={catalog} 
                                                categoryMap={categoryMap}/>)} />
             </Container>
-            <Footer />        
+
+            <Footer leftText = {[{
+                        type: "text",
+                        value: "While using this site, you agree to have read and accepted our "},
+                     {
+                        type: "link",
+                        value: "terms of use",
+                        to: "/terms-of-use",
+                        
+                     },
+                     {
+                      type: "text",
+                      value: ", "
+                     },
+                     {
+                        type: "link",
+                        value: "cookie and privacy policy",
+                        to: "/privacy-policy",   
+                     },
+                     {
+                        type: "text",
+                        value: ". Copyright 2019. All Rights Reserved."
+                     }
+                    ]} />        
           </OuterContainer>
         </Switch>
 
